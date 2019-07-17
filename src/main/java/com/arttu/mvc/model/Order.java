@@ -10,13 +10,13 @@ public class Order {
     private Date date;
     private int amount;
     private float cost;
-    private HashSet<Client> clientId;
-    private HashSet<Item> itemId;
+    private int clientId;
+    private int itemId;
 
     public Order() {
     }
 
-    public Order(int id, Date date, int amount, float cost, HashSet<Client> clientId, HashSet<Item> itemId) {
+    public Order(int id, Date date, int amount, float cost, int clientId, int itemId) {
         this.id = id;
         this.date = date;
         this.amount = amount;
@@ -57,19 +57,19 @@ public class Order {
         this.cost = cost;
     }
 
-    public HashSet<Client> getClientId() {
+    public int getClientId() {
         return clientId;
     }
 
-    public void setClientId(HashSet<Client> clientId) {
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
-    public HashSet<Item> getItemId() {
+    public int getItemId() {
         return itemId;
     }
 
-    public void setItemId(HashSet<Item> itemId) {
+    public void setItemId(int itemId) {
         this.itemId = itemId;
     }
 

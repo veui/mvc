@@ -1,14 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
 <%@include file="/WEB-INF/pages/header.jsp" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Main page of the client</title>
+    <title>Main page of the item</title>
 </head>
 <body>
-<c:if test="${hierarchicalItem != null}">
     <table>
         <tr>
             <th>Item ID</th>
@@ -16,21 +13,37 @@
             <th>Price</th>
             <th>Specialty ID</th>
         </tr>
-        <c:forEach items="${hierarchicalItem}" var="hier">
-            <tr>
-                <td><c:out value="${hier.id}" /></td>
-                <td><c:out value="${hier.item}" /></td>
-                <td><c:out value="${hier.price}" /></td>
-                <td><a href="/specialty/find/<c:out value='${hier.specialtyId}' />">${hier.specialtyId}</a></td>
-                <td><a href="order/add/${hier.id}">Order</a></td>
-            </tr>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${item != null}">
+                <tr>
+                    <td><c:out value="${item.id}" /></td>
+                    <td><c:out value="${item.item}" /></td>
+                    <td><c:out value="${item.price}" /></td>
+                    <td>
+                        <a href="/specialty/find/<c:out value='${item.specialtyId}' />">${item.specialtyId}</a>
+                    </td>
+                    <td><a href="item/edit/${item.id}">Edit</a></td>
+                    <td><a href="item/delete/${item.id}">Delete</a></td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${itemList}" var="it">
+                    <tr>
+                        <td><c:out value="${it.id}" /></td>
+                        <td><c:out value="${it.item}" /></td>
+                        <td><c:out value="${it.price}" /></td>
+                        <td><a href="/specialty/find/<c:out value='${it.specialtyId}' />">${it.specialtyId}</a></td>
+                        <td><a href="item/edit/${it.id}">Edit</a></td>
+                        <td><a href="item/delete/${it.id}">Delete</a></td>
+                    </tr>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </table>
-</c:if>
 <br />
+<a href="${pageContext.request.contextPath}/item/add">Add item</a>
 </body>
 </html>
-
 
 <style>
     body {

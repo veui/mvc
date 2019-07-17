@@ -3,11 +3,9 @@ package com.arttu.mvc.dao.daoImpl;
 import com.arttu.mvc.dao.ClientDao;
 import com.arttu.mvc.dao.enums.ClientQueries;
 import com.arttu.mvc.model.Client;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -25,7 +23,7 @@ public class ClientDaoImpl implements ClientDao {
     @Autowired
     public ClientDaoImpl(DataSource dataSource) {
         if (dataSource == null) {
-            throw new IllegalArgumentException("DataSourceUtil must not be null");
+            throw new IllegalArgumentException("DataSource must not be null");
         }
         this.dataSource = dataSource;
     }
@@ -34,8 +32,6 @@ public class ClientDaoImpl implements ClientDao {
     @Override
     public void add(Client client) {
         LOGGER.info("Method add started to work");
-        LOGGER.info("\n" + client.getUsername() + "\n" + client.getPassword() + "\n" + client.getFirstName() + "\n" +
-                client.getLastName() + "\n" + client.getEmail() + "\n" + client.getPhone());
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement statement = connection.prepareStatement(ClientQueries.SQL_INSERT.getValue())) {
                 statement.setString(1, client.getUsername());
@@ -60,25 +56,26 @@ public class ClientDaoImpl implements ClientDao {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
     }
 
     @Override
     public void edit(Client client) {
+        LOGGER.info("Method edit started to work " + client.toString());
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement statement = connection.prepareStatement(ClientQueries.SQL_UPDATE.getValue())) {
                 statement.setString(1, client.getUsername());
                 statement.setString(2, client.getPassword());
-                statement.setString(3, client.getLastName());
-                statement.setString(4, client.getFirstName());
+                statement.setString(3, client.getFirstName());
+                statement.setString(4, client.getLastName());
                 statement.setString(5, client.getEmail());
                 statement.setInt(6, client.getPhone());
                 statement.setInt(7, client.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
     }
 
@@ -102,7 +99,7 @@ public class ClientDaoImpl implements ClientDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return result;
     }
@@ -129,8 +126,20 @@ public class ClientDaoImpl implements ClientDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return client;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement(ClientQueries.SQL_DELETE.getValue())) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
     }
 }

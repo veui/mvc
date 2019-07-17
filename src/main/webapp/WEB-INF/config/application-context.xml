@@ -39,8 +39,21 @@
     <context:property-placeholder location="classpath:log4j2.properties" />
 
     <mvc:view-controller path="/" view-name="index" />
-    <mvc:view-controller path="/message" view-name="message"/>
-    <mvc:view-controller path="/client" view-name="client" />
-    <mvc:view-controller path="/client/add" view-name="client" />
+    <mvc:view-controller path="/client" view-name="/client/client" />
+    <mvc:view-controller path="/client/add" view-name="client/addClient" />
+    <mvc:view-controller path="/client/edit" view-name="client/editClient" />
+    <mvc:view-controller path="/item" view-name="item/item" />
+    <mvc:view-controller path="/item/add" view-name="item/addItem" />
+    <mvc:view-controller path="/item/edit" view-name="item/editItem" />
+    <mvc:view-controller path="/department" view-name="department/department" />
+    <mvc:view-controller path="/department/add" view-name="department/addDepartment" />
+    <mvc:view-controller path="/department/edit" view-name="department/editDepartment" />
+    <mvc:view-controller path="/order" view-name="order/order" />
+    <mvc:view-controller path="/order/add" view-name="order/addOrder" />
+    <mvc:view-controller path="/order/edit" view-name="order/editOrder" />
+    <mvc:view-controller path="/specialty" view-name="specialty/specialty" />
+    <mvc:view-controller path="/specialty/add" view-name="specialty/addSpecialty" />
+    <mvc:view-controller path="/specialty/edit" view-name="specialty/editSpecialty" />
+    <mvc:view-controller path="/error" view-name="error" />
 
 </beans>

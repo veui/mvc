@@ -2,6 +2,7 @@ package com.arttu.mvc.service;
 
 import com.arttu.mvc.model.Client;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ClientService {
@@ -10,4 +11,6 @@ public interface ClientService {
     void edit(Client client);
     List<Client> findAll();
     Client findById(int id);
+
+    void deleteById(int id);
 }

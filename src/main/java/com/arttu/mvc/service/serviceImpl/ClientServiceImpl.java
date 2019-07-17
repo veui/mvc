@@ -6,6 +6,7 @@ import com.arttu.mvc.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -41,5 +42,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client findById(int id) {
         return clientDao.findById(id);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        clientDao.deleteById(id);
     }
 }

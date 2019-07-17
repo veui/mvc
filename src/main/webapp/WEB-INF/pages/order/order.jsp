@@ -1,36 +1,39 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
 <%@include file="/WEB-INF/pages/header.jsp" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Main page of the client</title>
+    <title>Main page of the order</title>
 </head>
 <body>
-<c:if test="${hierarchicalItem != null}">
+<c:if test="${orderList != null}">
     <table>
         <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Cost</th>
+            <th>Client ID</th>
             <th>Item ID</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Specialty ID</th>
         </tr>
-        <c:forEach items="${hierarchicalItem}" var="hier">
+        <c:forEach items="${orderList}" var="ord">
             <tr>
-                <td><c:out value="${hier.id}" /></td>
-                <td><c:out value="${hier.item}" /></td>
-                <td><c:out value="${hier.price}" /></td>
-                <td><a href="/specialty/find/<c:out value='${hier.specialtyId}' />">${hier.specialtyId}</a></td>
-                <td><a href="order/add/${hier.id}">Order</a></td>
+                <td><c:out value="${ord.id}" /></td>
+                <td><c:out value="${ord.date}" /></td>
+                <td><c:out value="${ord.amount}" /></td>
+                <td><c:out value="${ord.cost}" /></td>
+                <td><a href="/client/find/<c:out value='${ord.clientId}' />">${ord.clientId}</a></td>
+                <td><a href="/item/find/<c:out value='${ord.itemId}' />">${ord.itemId}</a></td>
+                <td><a href="order/edit/${ord.id}">Edit</a></td>
+                <td><a href="order/delete/${ord.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
 <br />
+<a href="${pageContext.request.contextPath}/order/add">Add order</a>
 </body>
 </html>
-
 
 <style>
     body {

@@ -1,36 +1,39 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
 <%@include file="/WEB-INF/pages/header.jsp" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Main page of the client</title>
+    <title>Main page of the department</title>
 </head>
 <body>
-<c:if test="${hierarchicalItem != null}">
     <table>
         <tr>
-            <th>Item ID</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Specialty ID</th>
+            <th>Department ID</th>
+            <th>Username</th>
         </tr>
-        <c:forEach items="${hierarchicalItem}" var="hier">
-            <tr>
-                <td><c:out value="${hier.id}" /></td>
-                <td><c:out value="${hier.item}" /></td>
-                <td><c:out value="${hier.price}" /></td>
-                <td><a href="/specialty/find/<c:out value='${hier.specialtyId}' />">${hier.specialtyId}</a></td>
-                <td><a href="order/add/${hier.id}">Order</a></td>
-            </tr>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${department != null}">
+                <td><c:out value="${department.id}" /></td>
+                <td><c:out value="${department.title}" /></td>
+                <td><a href="department/edit/${department.id}">Edit</a></td>
+                <td><a href="department/delete/${department.id}">Delete</a></td>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${departmentList}" var="department">
+                    <tr>
+                        <td><c:out value="${department.id}" /></td>
+                        <td><c:out value="${department.title}" /></td>
+                        <td><a href="department/edit/${department.id}">Edit</a></td>
+                        <td><a href="department/delete/${department.id}">Delete</a></td>
+                    </tr>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </table>
-</c:if>
 <br />
+<a href="${pageContext.request.contextPath}/department/add">Add department</a>
 </body>
 </html>
-
 
 <style>
     body {

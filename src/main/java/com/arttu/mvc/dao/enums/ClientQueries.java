@@ -2,14 +2,14 @@ package com.arttu.mvc.dao.enums;
 
 public enum ClientQueries {
     SQL_FIND_ALL("SELECT * FROM CLIENT"),
-    SQL_FIND_BY_ID("select * from client where id = ?"),
+    SQL_FIND_BY_ID("select * from client where client_id = ?"),
     SQL_INSERT("insert into Client" +
             "(username, password, last_name, first_name, email, phone) " +
             "values (?, ?, ?, ?, ?, ?)"),
     SQL_UPDATE("update client set username = ?, password = ?, last_name = ?, first_name = ?, " +
                        "email = ?, phone = ?" +
-                       "where id = ?"),
-    SQL_DELETE("delete from client where id = ?");
+                       "where client_id = ?"),
+    SQL_DELETE("delete from client where client_id = ?");
 
     private String value;
 

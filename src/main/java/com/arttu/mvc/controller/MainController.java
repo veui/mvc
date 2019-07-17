@@ -1,17 +1,31 @@
 package com.arttu.mvc.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.arttu.mvc.service.ItemService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class MainController {
 
-    @RequestMapping(value = "/message", method = RequestMethod.GET)
+    private static final Logger LOGGER = LogManager.getLogger(MainController.class);
+    private ItemService itemService;
+
+    @Autowired
+    public MainController(ItemService itemService) {
+        this.itemService = itemService;
+    }
+
+    @GetMapping(value = "/")
     public ModelAndView hello() {
-        ModelAndView model = new ModelAndView("message");
-        model.addObject("msg", true);
-        return model;
+        LOGGER.info("hello method of MainController started to work");
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("hierarchicalItem", itemService.findAllHierarchicalSpec());
+        modelAndView.setStatus(HttpStatus.OK);
+        return modelAndView;
     }
 }

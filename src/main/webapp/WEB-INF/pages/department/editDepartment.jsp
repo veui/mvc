@@ -2,85 +2,96 @@
 <%@ page contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@include file="/WEB-INF/pages/header.jsp" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Main page of the client</title>
+    <title>Edit Department</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<c:if test="${hierarchicalItem != null}">
+<form name="departmentList" action="${pageContext.request.contextPath}/department">
     <table>
         <tr>
-            <th>Item ID</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Specialty ID</th>
+            <td>Title</td>
+            <td>
+                <label>
+                    <input name="title" id="title" type="text" value="${departmentList.title}" />
+                </label>
+            </td>
         </tr>
-        <c:forEach items="${hierarchicalItem}" var="hier">
-            <tr>
-                <td><c:out value="${hier.id}" /></td>
-                <td><c:out value="${hier.item}" /></td>
-                <td><c:out value="${hier.price}" /></td>
-                <td><a href="/specialty/find/<c:out value='${hier.specialtyId}' />">${hier.specialtyId}</a></td>
-                <td><a href="order/add/${hier.id}">Order</a></td>
-            </tr>
-        </c:forEach>
+        <tr>
+            <td></td>
+            <td><button type="button" onclick="edit()">Submit</button></td>
+        </tr>
     </table>
-</c:if>
-<br />
+</form>
 </body>
+<script>
+    function validateString(username) {
+        return /^[0-9a-zA-Z_.-]+$/.test(username);
+    }
+    function edit() {
+        var isValid = true;
+        var edit = {
+            id : ${departmentList.id},
+            title : $('#title').val()
+        };
+        if (validateString(edit.title) === false) {
+            isValid = false;
+        }
+        if (isValid === true) {
+            $.ajax({
+                url: "/department/edit",
+                type: 'POST',
+                processData: false,
+                data: JSON.stringify(edit),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.stat === 1) {
+                        window.location.assign("/department");
+                    }
+                }
+            })
+        } else {
+            window.alert('Your data is invalid. Please enter correct data');
+            $('#title').val('');
+        }
+    }
+</script>
 </html>
-
 
 <style>
     body {
         font-family: Arial, sans-serif;
-        padding: 0;@localhost
-    margin: 0;
+        padding: 0;
+        margin: 0;
         color: #222222;
         background: #f0b841;
-        height: 100vh;
-    }
-
-    header {
-        margin-left: 30px;
-        padding-top: 1%;
     }
 
     .mainMenu {
-        margin-left: 24%;
-        padding-top: 1%;
+        margin-left: 30%;
+        padding-top: 0%;
         display: block;
     }
 
-    .mainMenu a {
-        color: #fff;
-        text-transform: uppercase;
-        text-align: center;
-        font-size: 18px;
-    }
 
-    table {
-        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-        font-size: 14px;
-        width: 820px;
-        text-align: left;
-        border-collapse: collapse;
-        background: #252F48;
-        margin: 5px;
-        color: white;
-    }
-    table th {
-        color: #EDB749;
-        border-bottom: 1px solid #37B5A5;
-        padding: 12px 17px;
-    }
     table td {
-        color: #f2fbff;
-        border-bottom: 1px solid #37B5A5;
-        border-right:1px solid #37B5A5;
-        padding: 7px 17px;
+        color: white;
+        padding: 20px 90px;
+        position: relative;
+        text-align: center;
+    }
 
+
+    div {
+        box-sizing: border-box;
+    }
+
+    section {
+        background: #f0b841;
+        height: 100vh;
+        font-size: 21px;
     }
 
     h1 {
@@ -88,9 +99,21 @@
         color: #fff;
         text-transform: uppercase;
         text-align: center;
+        margin: -5px;
     }
 
-    .addButton {
+    input {
+        border-radius: 8px;
+        outline: none;
+        background-color: #f5f5e7;
+        border: none;
+        text-align: center;
+        height: 40px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    .myButton {
         -moz-box-shadow: 0px 10px 14px -7px #3cb558;
         -webkit-box-shadow: 0px 10px 14px -7px #3cb558;
         box-shadow: 0px 10px 14px -7px #3cb558;
@@ -114,9 +137,8 @@
         padding:13px 32px;
         text-decoration:none;
         text-shadow:0px 1px 0px #12941d;
-        margin-left: 30%;
     }
-    .addButton:hover {
+    .myButton:hover {
         background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b3ad09), color-stop(1, #1be053));
         background:-moz-linear-gradient(top, #b3ad09 5%, #1be053 100%);
         background:-webkit-linear-gradient(top, #b3ad09 5%, #1be053 100%);
@@ -126,7 +148,7 @@
         filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b3ad09', endColorstr='#1be053',GradientType=0);
         background-color:#b3ad09;
     }
-    .addButton:active {
+    .myButton:active {
         position:relative;
         top:1px;
     }

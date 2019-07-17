@@ -1,6 +1,5 @@
 package com.arttu.mvc.model;
 
-import java.util.HashSet;
 import java.util.Objects;
 
 public class Item {
@@ -8,16 +7,16 @@ public class Item {
     private int id;
     private String item;
     private float price;
-    private HashSet<Specialty> specialtieId;
+    private int specialtyId;
 
     public Item() {
     }
 
-    public Item(int id, String item, float price, HashSet<Specialty> specialtieId) {
+    public Item(int id, String item, float price, int specialtyId) {
         this.id = id;
         this.item = item;
         this.price = price;
-        this.specialtieId = specialtieId;
+        this.specialtyId = specialtyId;
     }
 
     public int getId() {
@@ -44,12 +43,12 @@ public class Item {
         this.price = price;
     }
 
-    public HashSet<Specialty> getSpecialtieId() {
-        return specialtieId;
+    public int getSpecialtyId() {
+        return specialtyId;
     }
 
-    public void setSpecialtieId(HashSet<Specialty> specialtieId) {
-        this.specialtieId = specialtieId;
+    public void setSpecialtyId(int specialtyId) {
+        this.specialtyId = specialtyId;
     }
 
     @Override
@@ -60,12 +59,12 @@ public class Item {
         return id == item1.id &&
                 Float.compare(item1.price, price) == 0 &&
                 item.equals(item1.item) &&
-                Objects.equals(specialtieId, item1.specialtieId);
+                Objects.equals(specialtyId, item1.specialtyId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, item, price, specialtieId);
+        return Objects.hash(id, item, price, specialtyId);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class Item {
                 "id=" + id +
                 ", item='" + item + '\'' +
                 ", price=" + price +
-                ", specialtieId=" + specialtieId +
+                ", specialtieId=" + specialtyId +
                 '}';
     }
 }

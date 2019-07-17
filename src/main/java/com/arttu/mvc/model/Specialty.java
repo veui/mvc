@@ -7,12 +7,12 @@ public class Specialty {
 
     private int id;
     private String title;
-    private HashSet<Department> departmentId;
+    private int departmentId;
 
     public Specialty() {
     }
 
-    public Specialty(int id, String title, HashSet<Department> departmentId) {
+    public Specialty(int id, String title, int departmentId) {
         this.id = id;
         this.title = title;
         this.departmentId = departmentId;
@@ -34,11 +34,11 @@ public class Specialty {
         this.title = title;
     }
 
-    public HashSet<Department> getDepartmentId() {
+    public int getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(HashSet<Department> departmentId) {
+    public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
 

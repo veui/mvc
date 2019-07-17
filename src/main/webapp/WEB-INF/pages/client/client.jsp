@@ -1,36 +1,56 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
 <%@include file="/WEB-INF/pages/header.jsp" %>
-<!DOCTYPE html>
 <html>
 <head>
     <title>Main page of the client</title>
 </head>
 <body>
-<c:if test="${hierarchicalItem != null}">
     <table>
         <tr>
-            <th>Item ID</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Specialty ID</th>
+            <th>Client ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone number</th>
         </tr>
-        <c:forEach items="${hierarchicalItem}" var="hier">
-            <tr>
-                <td><c:out value="${hier.id}" /></td>
-                <td><c:out value="${hier.item}" /></td>
-                <td><c:out value="${hier.price}" /></td>
-                <td><a href="/specialty/find/<c:out value='${hier.specialtyId}' />">${hier.specialtyId}</a></td>
-                <td><a href="order/add/${hier.id}">Order</a></td>
-            </tr>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${client != null}">
+                <tr>
+                    <td><c:out value="${client.id}" /></td>
+                    <td><c:out value="${client.username}" /></td>
+                    <td><c:out value="${client.password}" /></td>
+                    <td><c:out value="${client.firstName}" /></td>
+                    <td><c:out value="${client.lastName}" /></td>
+                    <td><c:out value="${client.email}" /></td>
+                    <td><c:out value="${client.phone}" /></td>
+                    <td><a href="client/edit/${client.id}">Edit</a></td>
+                    <td><a href="client/delete/${client.id}">Delete</a></td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${clientList}" var="client">
+                    <tr>
+                        <td><c:out value="${client.id}" /></td>
+                        <td><c:out value="${client.username}" /></td>
+                        <td><c:out value="${client.password}" /></td>
+                        <td><c:out value="${client.firstName}" /></td>
+                        <td><c:out value="${client.lastName}" /></td>
+                        <td><c:out value="${client.email}" /></td>
+                        <td><c:out value="${client.phone}" /></td>
+                        <td><a href="client/edit/${client.id}">Edit</a></td>
+                        <td><a href="client/delete/${client.id}">Delete</a></td>
+                    </tr>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </table>
-</c:if>
 <br />
+<a href="${pageContext.request.contextPath}/client/add">Add client</a>
 </body>
 </html>
-
 
 <style>
     body {
