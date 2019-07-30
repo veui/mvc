@@ -1,5 +1,7 @@
-# For more Java information and examples, see
-# https://docs.semaphoreci.com/article/85-language-java
+# Find an example for your language and learn about the core features through
+# the guided tour:
+# https://docs.semaphoreci.com/category/58-programming-languages
+# https://docs.semaphoreci.com/category/56-guided-tour
 version: v1.0
 name: Hello Semaphore
 agent:
@@ -7,13 +9,15 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Java example
+  - name: Simple example
     task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
       jobs:
-        - name: Run java
-          commands:
-            - java --version
-            - mvn -v
-            # Uncomment the following line to pull your code,
-            # then proceed by adding your custom commands:
-            #- checkout
+      - name: Download our code
+        commands:
+          - echo "Hello from Semaphore!"
+          - echo $APP_ENV
+          - checkout
+          - ls -alh
