@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/mvc
+	    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="com.arttu.mvc.*"/>
+    <mvc:annotation-driven />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- For WebLogic -->
+    <jee:jndi-lookup id="dbDataSource" jndi-name="JDBCOracleDB"
+                     expected-type="javax.sql.DataSource" />
+
+    <context:property-placeholder location="classpath:jdbc.properties" />
+    <context:property-placeholder location="classpath:log4j2.properties" />
+
+    <mvc:view-controller path="/" view-name="index" />
+    <mvc:view-controller path="/client" view-name="/client/client" />
+    <mvc:view-controller path="/client/add" view-name="client/addClient" />
+    <mvc:view-controller path="/client/edit" view-name="client/editClient" />
+    <mvc:view-controller path="/item" view-name="item/item" />
+    <mvc:view-controller path="/item/add" view-name="item/addItem" />
+    <mvc:view-controller path="/item/edit" view-name="item/editItem" />
+    <mvc:view-controller path="/department" view-name="department/department" />
+    <mvc:view-controller path="/department/add" view-name="department/addDepartment" />
+    <mvc:view-controller path="/department/edit" view-name="department/editDepartment" />
+    <mvc:view-controller path="/order" view-name="order/order" />
+    <mvc:view-controller path="/order/add" view-name="order/addOrder" />
+    <mvc:view-controller path="/order/edit" view-name="order/editOrder" />
+    <mvc:view-controller path="/specialty" view-name="specialty/specialty" />
+    <mvc:view-controller path="/specialty/add" view-name="specialty/addSpecialty" />
+    <mvc:view-controller path="/specialty/edit" view-name="specialty/editSpecialty" />
+    <mvc:view-controller path="/error" view-name="error" />
+
+</beans>
