@@ -50,7 +50,7 @@ public class ClientController {
     @GetMapping(value = "/client/add")
     public ModelAndView add() {
         LOGGER.info("Add method(GET) started to work");
-        return new ModelAndView("/addClient");
+        return new ModelAndView("client/addClient");
     }
 
     @PostMapping(value = "/client/add", consumes = {MediaType.APPLICATION_JSON_VALUE},
