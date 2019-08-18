@@ -48,4 +48,6 @@
     <mvc:view-controller path="/specialty/edit" view-name="specialty/editSpecialty" />
     <mvc:view-controller path="/error" view-name="error" />
 
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
 </beans>
