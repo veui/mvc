@@ -51,7 +51,7 @@ public class SpecialtyController {
 
     @GetMapping("/specialty/add")
     public ModelAndView add() {
-        ModelAndView modelAndView = new ModelAndView("/addSpecialty");
+        ModelAndView modelAndView = new ModelAndView("specialty/addSpecialty");
         modelAndView.addObject("departmentList", departmentService.findAll());
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;

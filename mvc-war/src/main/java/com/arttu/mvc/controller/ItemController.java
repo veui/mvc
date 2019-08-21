@@ -46,7 +46,7 @@ public class ItemController {
 
     @GetMapping("/item/add")
     public ModelAndView add() {
-        ModelAndView modelAndView = new ModelAndView("item/addItem.");
+        ModelAndView modelAndView = new ModelAndView("item/addItem");
         modelAndView.addObject("specialtyList", specialtyService.findAll());
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;

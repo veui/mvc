@@ -80,7 +80,7 @@ public class OrderController {
 
     @GetMapping(value = "/order/edit/{id}")
     public ModelAndView edit(@PathVariable int id) {
-        ModelAndView modelAndView = new ModelAndView("order/editOrder.jsp");
+        ModelAndView modelAndView = new ModelAndView("order/editOrder");
         modelAndView.addObject("clientList", clientService.findAll());
         modelAndView.addObject("itemList", itemService.findAll());
         modelAndView.addObject("orderList", orderService.findById(id));
