@@ -7,7 +7,7 @@ function validateFloat(float) {
         return valid;
 }
 function validateString(username) {
-    return /^[0-9a-zA-Z_.-]+$/.test(username);
+    return /^[0-9a-zA-Z_ .-]+$/.test(username);
 }
 function add() {
     var isValid = true;

@@ -7,7 +7,7 @@
 <html>
     <head>
         <title>Edit Order</title>
-        <link href="<spring:url value="/resources/css/edit.css" />" rel="stylesheet" type="text/css" />
+        <link href="<spring:url value="/resources/css/order/edit.css" />" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
 <body>

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the item</title>
-    <link rel="stylesheet" type="text/css" href="<spring:url value="/resources/css/index.css" />" />
+    <link rel="stylesheet" type="text/css" href="<spring:url value="/resources/css/item/index.css" />" />
 </head>
 <body>
     <table>

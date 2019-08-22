@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the order</title>
-    <link href="<spring:url value="/resources/css/index.css" />" rel="stylesheet" type="text/css" />
+    <link href="<spring:url value="/resources/css/order/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <c:if test="${orderList != null}">

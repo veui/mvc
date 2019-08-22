@@ -1,6 +1,6 @@
 function edit() {
     function validateString(username) {
-        return /^[0-9a-zA-Z_.-]+$/.test(username);
+        return /^[0-9a-zA-Z_ .-]+$/.test(username);
     }
     var isValid = true;
     var edit = {

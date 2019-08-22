@@ -7,7 +7,7 @@
 <head>
     <title>Edit Department</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="<spring:url value="/resources/css/edit.css" />" rel="stylesheet" type="text/css" />
+    <link href="<spring:url value="/resources/css/department/edit.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <form name="departmentList" action="${pageContext.request.contextPath}/department">

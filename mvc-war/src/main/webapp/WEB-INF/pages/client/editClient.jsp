@@ -8,7 +8,7 @@
     <title>Edit Client</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="<spring:url value="/resources/js/client/edit.js" />" rel="script" type="text/javascript"></script>
-    <link href="<spring:url value="/resources/css/edit.css" />" rel="stylesheet" type="text/css" />
+    <link href="<spring:url value="/resources/css/client/edit.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <form name="clientList" action="${pageContext.request.contextPath}/client">

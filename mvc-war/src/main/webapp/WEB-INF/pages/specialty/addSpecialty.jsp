@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Add specailty</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="<spring:url value="/resources/css/add.css" />" rel="stylesheet" type="text/css">
+    <link href="<spring:url value="/resources/css/specialty/add.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Specialty Input Form</h1>

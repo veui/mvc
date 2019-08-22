@@ -10,7 +10,7 @@
     <title>Add client</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="<spring:url value="/resources/js/client/add.js" />"></script>
-    <link href="<spring:url value="/resources/css/add.css" />" rel="stylesheet" type="text/css" />
+    <link href="<spring:url value="/resources/css/client/add.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <table>
@@ -61,6 +61,5 @@
             <td><button type="button" onclick="add()">Submit</button></td>
         </tr>
     </table>
-
 </body>
 </html>

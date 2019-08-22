@@ -7,7 +7,7 @@ function validateInt(int) {
 }
 
 function validateString(username) {
-    return /^[0-9a-zA-Z_.-]+$/.test(username);
+    return /^[0-9a-zA-Z_ .-]+$/.test(username);
 }
 function edit() {
     var isValid = true;

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the specialty</title>
-    <link href="<spring:url value="/resources/css/index.css" />" rel="stylesheet" type="text/css" />
+    <link href="<spring:url value="/resources/css/specialty/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <table>

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the department</title>
-    <link href="<spring:url value="/resources/css/index.css" />" rel="stylesheet" type="text/css" />
+    <link href="<spring:url value="/resources/css/department/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <table id="departmentTable">

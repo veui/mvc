@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Add order</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="<spring:url value="/resources/css/add.css" />" type="text/css">
+    <link rel="stylesheet" href="<spring:url value="/resources/css/order/add.css" />" type="text/css">
 </head>
 <body>
 <h1>Order Input Form</h1>
