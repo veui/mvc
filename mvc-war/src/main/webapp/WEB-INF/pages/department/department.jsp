@@ -17,16 +17,16 @@
             <c:when test="${department != null}">
                 <td><c:out value="${department.id}" /></td>
                 <td><c:out value="${department.title}" /></td>
-                <td><a href="department/edit/${department.id}">Edit</a></td>
-                <td><a href="department/delete/${department.id}">Delete</a></td>
+                <td><a href="../../department/edit/${department.id}">Edit</a></td>
+                <td><a href="../../department/delete/${department.id}">Delete</a></td>
             </c:when>
             <c:otherwise>
                 <c:forEach items="${departmentList}" var="department">
                     <tr>
                         <td><c:out value="${department.id}" /></td>
                         <td><c:out value="${department.title}" /></td>
-                        <td><a href="department/edit/${department.id}">Edit</a></td>
-                        <td><a href="department/delete/${department.id}">Delete</a></td>
+                        <td><a href="../../department/edit/${department.id}">Edit</a></td>
+                        <td><a href="../../department/delete/${department.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>
