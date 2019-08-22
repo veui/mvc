@@ -8,9 +8,6 @@
     <link href="<spring:url value="/resources/css/client/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <label>
-        <input id="search" value="search..." />
-    </label>
     <table>
         <tr>
             <th>Client ID</th>

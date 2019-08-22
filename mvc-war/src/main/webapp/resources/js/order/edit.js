@@ -8,7 +8,7 @@ function validateFloat(float) {
     }
 function validateInt(int) {
     var valid = false;
-    if (typeof int === 'number' && int > 0) {
+    if (int > 0) {
         valid = true;
     }
     return valid;
