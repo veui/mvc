@@ -39,6 +39,19 @@ function add() {
             success: function (data) {
                 if (data.stat === 1) {
                     window.location.replace("/client");
+                } else if (data.stat === 0) {
+                    if (data.err === 'username') {
+                        console.log("username");
+                        $("#username-non-unique-message").html("This username is unavailable.");
+                    }
+                    if (data.err === 'email') {
+                        console.log('email');
+                        $("#email-non-unique-message").html("Email is unavailable");
+                    }
+                    if (data.err === 'phone') {
+                        console.log('phone');
+                        $("#phone-non-unique-message").html("Phone is anavailable");
+                    }
                 }
             }
         });

@@ -20,6 +20,7 @@
                 <label>
                     <input name="username" id="username" type="text" />
                 </label>
+                <div id="username-non-unique-message"></div>
             </td>
         </tr>
         <tr>
@@ -44,16 +45,20 @@
         </tr>
         <tr>
             <td>Email</td>
-            <td><label>
-                <input name="email" id="email" type="email" />
-            </label></td>
+            <td>
+                <label>
+                    <input name="email" id="email" type="email" />
+                </label>
+                <div id="email-non-unique-message"></div>
+            </td>
         </tr>
         <tr>
             <td>Phone</td>
             <td>
                 <label>
-                    <input name="phone" id="phone" type="text" />
+                    <input name="phone" id="phone" type="number" />
                 </label>
+                <div id="phone-non-unique-message"></div>
             </td>
         </tr>
         <tr>
