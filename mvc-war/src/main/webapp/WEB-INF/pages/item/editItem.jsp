@@ -37,12 +37,12 @@
             </td>
         </tr>
         <tr>
-            <td>Specialty ID</td>
+            <td>Specialty</td>
             <td>
                 <label>
                     <select id="selectId">
                         <c:forEach items="${specialtyList}" var="spec">
-                            <option id="optionDp" value="${spec.id}">${spec.id}</option>
+                            <option id="optionDp" value="${spec.id}">${spec.title}</option>
                         </c:forEach>
                     </select>
                 </label>

@@ -40,31 +40,31 @@
         </label></td>
     </tr>
     <tr>
-        <td>Client ID</td>
+        <td>Client</td>
         <td>
             <label for="selectClient">
                 <select id="selectClient">
                     <c:forEach items="${clientList}" var="cli">
-                        <option id="optionDp" value="${cli.id}">${cli.id}</option>
+                        <option id="optionDp" value="${cli.id}">${cli.username}</option>
                     </c:forEach>
                 </select>
             </label>
         </td>
     </tr>
     <tr>
-        <td>Item ID</td>
+        <td>Item</td>
         <td>
             <c:choose>
                 <c:when test="${item != null}">
                     <select disabled id="selectItem">
-                        <option value="${item.id}">${item.id}</option>
+                        <option value="${item.id}">${item.item}</option>
                     </select>
                 </c:when>
 
                 <c:otherwise>
                     <select id="selectItem">
                         <c:forEach items="${itemList}" var="it">
-                            <option id="optionDp" value="${it.id}">${it.id}</option>
+                            <option id="optionDp" value="${it.id}">${it.item}</option>
                         </c:forEach>
                     </select>
                 </c:otherwise>

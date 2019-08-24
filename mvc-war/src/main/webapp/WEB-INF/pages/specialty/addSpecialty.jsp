@@ -25,12 +25,12 @@
         </td>
     </tr>
     <tr>
-        <td>Department ID</td>
+        <td>Department</td>
         <td>
             <label for="selectId">
                 <select id="selectId">
                     <c:forEach items="${departmentList}" var="department">
-                        <option id="optionDp" value="${department.id}">${department.id}</option>
+                        <option id="optionDp" value="${department.id}">${department.title}</option>
                     </c:forEach>
                 </select>
             </label>

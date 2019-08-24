@@ -13,7 +13,7 @@
             <th>Item ID</th>
             <th>Item</th>
             <th>Price</th>
-            <th>Specialty ID</th>
+            <th>Specialty</th>
         </tr>
         <c:choose>
             <c:when test="${item != null}">
@@ -22,7 +22,8 @@
                     <td><c:out value="${item.item}" /></td>
                     <td><c:out value="${item.price}" /></td>
                     <td>
-                        <a href="/specialty/find/<c:out value='${item.specialtyId}' />">${item.specialtyId}</a>
+                        <a href="/specialty/find/<c:out value='${item.specialtyId}' />">
+                                ${item.specialtyId}</a>
                     </td>
                     <td><a href="item/edit/${item.id}">Edit</a></td>
                     <td><a href="item/delete/${item.id}">Delete</a></td>
@@ -34,7 +35,9 @@
                         <td><c:out value="${it.id}" /></td>
                         <td><c:out value="${it.item}" /></td>
                         <td><c:out value="${it.price}" /></td>
-                        <td><a href="/specialty/find/<c:out value='${it.specialtyId}' />">${it.specialtyId}</a></td>
+                        <td><a href="/specialty/find/<c:out value='${it.specialtyId}' />">
+                                ${it.specialtyId}
+                        </td>
                         <td><a href="item/edit/${it.id}">Edit</a></td>
                         <td><a href="item/delete/${it.id}">Delete</a></td>
                     </tr>

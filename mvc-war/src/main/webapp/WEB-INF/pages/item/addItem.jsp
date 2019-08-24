@@ -33,12 +33,12 @@
         </td>
     </tr>
     <tr>
-        <td>Specialty Id</td>
+        <td>Specialty</td>
         <td>
             <label for="selectId">
                 <select id="selectId">
                     <c:forEach items="${specialtyList}" var="spe">
-                        <option id="optionDp" value="${spe.id}">${spe.id}</option>
+                        <option id="optionDp" value="${spe.id}">${spe.title}</option>
                     </c:forEach>
                 </select>
             </label>

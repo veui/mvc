@@ -48,6 +48,7 @@
     <mvc:view-controller path="/specialty/edit" view-name="specialty/editSpecialty" />
     <mvc:view-controller path="/error" view-name="error" />
 
+    <mvc:resources mapping="/resources/css/**" location="/resources/css/" />
     <mvc:resources mapping="/resources/css/client/**" location="/resources/css/client/" />
     <mvc:resources mapping="/resources/css/department/**" location="/resources/css/department/" />
     <mvc:resources mapping="/resources/css/item/**" location="/resources/css/item/" />

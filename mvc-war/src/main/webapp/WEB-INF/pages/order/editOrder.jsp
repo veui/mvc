@@ -41,24 +41,24 @@
             </label></td>
         </tr>
         <tr>
-            <td>Client ID</td>
+            <td>Client</td>
             <td>
                 <label for="selectClient">
                     <select id="selectClient">
                         <c:forEach items="${clientList}" var="cli">
-                            <option id="optionDp" value="${cli.id}">${cli.id}</option>
+                            <option id="optionDp" value="${cli.id}">${cli.username}</option>
                         </c:forEach>
                     </select>
                 </label>
             </td>
         </tr>
         <tr>
-            <td>Item ID</td>
+            <td>Item</td>
             <td>
                 <label for="selectItem">
                     <select id="selectItem">
                         <c:forEach items="${itemList}" var="it">
-                            <option id="optionDp" value="${it.id}">${it.id}</option>
+                            <option id="optionDp" value="${it.id}">${it.item}</option>
                         </c:forEach>
                     </select>
                 </label>
