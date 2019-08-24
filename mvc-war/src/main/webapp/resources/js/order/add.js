@@ -4,9 +4,12 @@ function add() {
         date : $('#date').val(),
         amount : $('#amount').val(),
         cost : $('#cost').val(),
-        clientId : $("#selectClient :selected").val(),
+        clientId : $("#selectClient").val(),
         itemId : $("#selectItem :selected").val()
     };
+    if (validateDatalist(add.clientId) === false) {
+        isValid = false;
+    }
     if (validateInt(add.amount) === false) {
         console.log("amount");
         isValid = false;
@@ -32,6 +35,19 @@ function add() {
     } else {
         window.alert('Your data is invalid. Please enter correct data');
     }
+
+    function validateDatalist(int) {
+        var obj = $("#datalist").find("option[value='" + int + "']");
+
+        if(obj != null && obj.length > 0) {
+            return true;
+        }
+        else {
+            alert("Client data is invalid. Please try to input correct data from list");
+            return false;
+        }
+    }
+
 function validateFloat(float) {
         var valid = false;
         var regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
