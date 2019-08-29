@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 @RestController
 public class ClientController {
@@ -50,7 +51,7 @@ public class ClientController {
     @GetMapping(value = "/client/add")
     public ModelAndView add() {
         LOGGER.info("Add method(GET) started to work");
-        return new ModelAndView("/addClient");
+        return new ModelAndView("client/addClient");
     }
 
     @PostMapping(value = "/client/add", consumes = {MediaType.APPLICATION_JSON_VALUE},
@@ -58,8 +59,24 @@ public class ClientController {
     public ResponseEntity<Map<String, Object>> add(@RequestBody Client client) {
         LOGGER.info("Add method(POST) started to work");
         Map<String, Object> response = new HashMap<>();
-        clientService.add(client);
-        response.put("stat", 1);
+
+        Predicate<Client> checkUsername = cl -> cl.getUsername().equals(client.getUsername());
+        Predicate<Client> checkEmail = cl -> cl.getEmail().equals(client.getEmail());
+        Predicate<Client> checkPhone = cl -> cl.getPhone() == client.getPhone();
+
+        if (checkUsername.test(client)) {
+            response.put("stat", 0);
+            response.put("err", "username");
+        } else if (checkEmail.test(client)) {
+            response.put("stat", 0);
+            response.put("err", "email");
+        } else if (checkPhone.test(client)) {
+            response.put("stat", 0);
+            response.put("err", "phone");
+        } else {
+            clientService.add(client);
+            response.put("stat", 1);
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
