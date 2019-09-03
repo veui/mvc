@@ -27,6 +27,7 @@
                 <label>
                     <input name="username" id="username" type="text" value="${clientList.username}" />
                 </label>
+                <div id="username-non-unique-message"></div>
             </td>
         </tr>
         <tr>
@@ -51,9 +52,12 @@
         </tr>
         <tr>
             <td>Email</td>
-            <td><label>
-                <input name="email" id="email" type="email" value="${clientList.email}" />
-            </label></td>
+            <td>
+                <label>
+                    <input name="email" id="email" type="email" value="${clientList.email}" />
+                </label>
+                <div id="email-non-unique-message"></div>
+            </td>
         </tr>
         <tr>
             <td>Phone</td>

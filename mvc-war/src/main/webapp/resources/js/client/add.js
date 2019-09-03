@@ -1,4 +1,7 @@
 function add() {
+    $("#username-non-unique-message").html("");
+    $("#email-non-unique-message").html("");
+
     var isValid = true;
     var add = {
         username : $('#username').val(),
@@ -29,31 +32,29 @@ function add() {
         isValid = false;
     }
     if (isValid === true) {
-        $.ajax({
-            url: "/client/add",
-            type: 'POST',
-            processData: false,
-            data: JSON.stringify(add),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (data) {
-                if (data.stat === 1) {
-                    window.location.replace("/client");
-                } else if (data.stat === 0) {
-                    for (var i=0; i<data.err.length; i++) {
-                        console.log(data.err[i])
-                    }
-                    if (data.err === 'username') {
-                        console.log("username");
-                        $("#username-non-unique-message").html("This username is unavailable.");
-                    }
-                    if (data.err === 'email') {
-                        console.log('email');
-                        $("#email-non-unique-message").html("Email is unavailable");
-                    }
-                }
+        fetch("/client/add", {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(add)
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            console.log(response);
+            if (response.message === 'OK') {
+                window.location.replace("/client");
             }
-        });
+            if (response.message === 'Client is not unique') {
+                $("#username-non-unique-message").html("This username is unavailable.");
+            }
+            if (response.message === 'Email is not unique') {
+                $("#email-non-unique-message").html("Email is unavailable");
+            }
+        }).catch (error => {
+            console.log(error)
+        })
     } else {
         window.alert('Your data is invalid. Please enter correct data');
     }

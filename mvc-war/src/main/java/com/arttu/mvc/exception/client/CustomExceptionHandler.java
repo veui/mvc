@@ -19,4 +19,10 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(new ClientErrorMessage("Email is not unique"),
                 HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ClientNotFoundException.class)
+    protected ResponseEntity<ClientErrorMessage> handleClientNotFoundException() {
+        return new ResponseEntity<>(new ClientErrorMessage("Client not found"),
+                HttpStatus.NOT_FOUND);
+    }
 }
