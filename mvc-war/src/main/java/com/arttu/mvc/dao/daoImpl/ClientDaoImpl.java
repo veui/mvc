@@ -142,4 +142,54 @@ public class ClientDaoImpl implements ClientDao {
             LOGGER.error(e);
         }
     }
+
+    @Override
+    public Client findByEmail(String email) {
+        Client client = new Client();
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection
+                    .prepareStatement(ClientQueries.SQL_FIND_BY_EMAIL.getValue())) {
+                statement.setString(1, email);
+                try(ResultSet rs = statement.executeQuery()) {
+                    while (rs.next()) {
+                        client.setId(rs.getInt(1));
+                        client.setUsername(rs.getString(2));
+                        client.setPassword(rs.getString(3));
+                        client.setFirstName(rs.getString(4));
+                        client.setLastName(rs.getString(5));
+                        client.setEmail(rs.getString(6));
+                        client.setPhone(rs.getInt(7));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return client;
+    }
+
+    @Override
+    public Client findByUsername(String username) {
+        Client client = new Client();
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection
+                    .prepareStatement(ClientQueries.SQL_FIND_BY_USERNAME.getValue())) {
+                statement.setString(1, username);
+                try(ResultSet rs = statement.executeQuery()) {
+                    while (rs.next()) {
+                        client.setId(rs.getInt(1));
+                        client.setUsername(rs.getString(2));
+                        client.setPassword(rs.getString(3));
+                        client.setFirstName(rs.getString(4));
+                        client.setLastName(rs.getString(5));
+                        client.setEmail(rs.getString(6));
+                        client.setPhone(rs.getInt(7));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return client;
+    }
 }

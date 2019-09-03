@@ -40,6 +40,9 @@ function add() {
                 if (data.stat === 1) {
                     window.location.replace("/client");
                 } else if (data.stat === 0) {
+                    for (var i=0; i<data.err.length; i++) {
+                        console.log(data.err[i])
+                    }
                     if (data.err === 'username') {
                         console.log("username");
                         $("#username-non-unique-message").html("This username is unavailable.");
@@ -47,10 +50,6 @@ function add() {
                     if (data.err === 'email') {
                         console.log('email');
                         $("#email-non-unique-message").html("Email is unavailable");
-                    }
-                    if (data.err === 'phone') {
-                        console.log('phone');
-                        $("#phone-non-unique-message").html("Phone is anavailable");
                     }
                 }
             }

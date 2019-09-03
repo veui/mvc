@@ -10,6 +10,8 @@ public interface ClientService {
     void edit(Client client);
     List<Client> findAll();
     Client findById(int id);
+    Client findByEmail(String email);
+    Client findByUsername(String username);
 
     void deleteById(int id);
 }

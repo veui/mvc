@@ -44,6 +44,16 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public Client findByEmail(String email) {
+        return clientDao.findByEmail(email);
+    }
+
+    @Override
+    public Client findByUsername(String username) {
+        return clientDao.findByUsername(username);
+    }
+
+    @Override
     public void deleteById(int id) {
         clientDao.deleteById(id);
     }
