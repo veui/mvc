@@ -132,15 +132,19 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
+        boolean isOk;
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement statement = connection.prepareStatement(ClientQueries.SQL_DELETE.getValue())) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
+                isOk = true;
             }
         } catch (SQLException e) {
             LOGGER.error(e);
+            isOk = false;
         }
+        return isOk;
     }
 
     @Override

@@ -28,8 +28,8 @@
                     <td><c:out value="${client.lastName}" /></td>
                     <td><c:out value="${client.email}" /></td>
                     <td><c:out value="${client.phone}" /></td>
-                    <td><a href="client/edit/${client.id}">Edit</a></td>
-                    <td><a href="client/delete/${client.id}">Delete</a></td>
+                    <td><a href="../../client/edit/${client.id}">Edit</a></td>
+                    <td><a href="../../client/delete/${client.id}">Delete</a></td>
                 </tr>
             </c:when>
             <c:otherwise>
@@ -42,8 +42,8 @@
                         <td><c:out value="${client.lastName}" /></td>
                         <td><c:out value="${client.email}" /></td>
                         <td><c:out value="${client.phone}" /></td>
-                        <td><a href="client/edit/${client.id}">Edit</a></td>
-                        <td><a href="client/delete/${client.id}">Delete</a></td>
+                        <td><a href="../../client/edit/${client.id}">Edit</a></td>
+                        <td><a href="../../client/delete/${client.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>

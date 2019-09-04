@@ -47,43 +47,12 @@ public class DepartmentController {
         return new ModelAndView("department/addDepartment");
     }
 
-    @PostMapping("/department/add")
-    public ResponseEntity<Map<String, Object>> add(@RequestBody Department department) {
-        Map<String, Object> response = new HashMap<>();
-        HttpStatus status = HttpStatus.OK;
-        try {
-            departmentService.add(department);
-            response.put("stat", 1);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.put("stat", 0);
-            status = HttpStatus.BAD_REQUEST;
-        }
-        return new ResponseEntity<>(response, status);
-    }
-
     @GetMapping(value = "/department/edit/{id}")
     public ModelAndView edit(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("department/editDepartment");
         modelAndView.addObject("departmentList", departmentService.findById(id));
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
-    }
-
-    @PostMapping(value = "/department/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Department department) {
-        Map<String, Object> response = new HashMap<>();
-        HttpStatus status = HttpStatus.OK;
-        try {
-            departmentService.edit(department);
-            response.put("stat", 1);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.put("stat", 0);
-            status = HttpStatus.BAD_REQUEST;
-        }
-        return new ResponseEntity<>(response, status);
     }
 
     @GetMapping(value = "/department/delete/{id}")

@@ -13,5 +13,5 @@ public interface ClientService {
     Client findByEmail(String email);
     Client findByUsername(String username);
 
-    void deleteById(int id);
+    boolean deleteById(int id);
 }

@@ -54,7 +54,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteById(int id) {
-        clientDao.deleteById(id);
+    public boolean deleteById(int id) {
+        return clientDao.deleteById(id);
     }
 }
