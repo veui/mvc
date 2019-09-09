@@ -8,4 +8,5 @@ import java.util.List;
 public interface DepartmentDao extends BaseDao<Department> {
     void deleteById(int id);
     List<Specialty> findAttachedSpecialties(int id);
+    Department findByTitle(String title);
 }

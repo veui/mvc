@@ -1,18 +1,20 @@
 package com.arttu.mvc.controller;
 
+import com.arttu.mvc.exception.department.DepartmentNotFoundException;
+import com.arttu.mvc.exception.specialty.SpecialtyNotFoundException;
 import com.arttu.mvc.model.Department;
+import com.arttu.mvc.model.Specialty;
 import com.arttu.mvc.service.DepartmentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 public class DepartmentController {
@@ -28,7 +30,12 @@ public class DepartmentController {
     @GetMapping("/department")
     public ModelAndView department() {
         ModelAndView modelAndView = new ModelAndView("department/department");
-        modelAndView.addObject("departmentList", departmentService.findAll());
+        List<Department> findAll = departmentService.findAll();
+        if (findAll == null) {
+            LOGGER.error("Exception in department method has been triggered");
+            throw new DepartmentNotFoundException("Department not found.");
+        }
+        modelAndView.addObject("departmentList", findAll);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
@@ -36,8 +43,18 @@ public class DepartmentController {
     @GetMapping("/department/find/{id}")
     public ModelAndView findById(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("department/department");
-        modelAndView.addObject("department", departmentService.findById(id));
-        modelAndView.addObject("specialtyList", departmentService.findAttachedSpecialties(id));
+        Department department = departmentService.findById(id);
+        List<Specialty> specialties = departmentService.findAttachedSpecialties(id);
+        if (department == null) {
+            LOGGER.error("Exception in 'findById(int id)' method has been triggered");
+            throw new DepartmentNotFoundException("Department not found.");
+        }
+        if (specialties == null) {
+            LOGGER.error("Exception in 'findById(int id)' method has been triggered");
+            throw new SpecialtyNotFoundException("Specialty not found");
+        }
+        modelAndView.addObject("department", department);
+        modelAndView.addObject("specialtyList", specialties);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
@@ -50,14 +67,25 @@ public class DepartmentController {
     @GetMapping(value = "/department/edit/{id}")
     public ModelAndView edit(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("department/editDepartment");
-        modelAndView.addObject("departmentList", departmentService.findById(id));
+        Department department = departmentService.findById(id);
+        if (department == null) {
+            LOGGER.error("Exception in 'edit(int id)' method has been triggered");
+            throw new DepartmentNotFoundException("Department not found.");
+        }
+        modelAndView.addObject("departmentList", department);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
 
     @GetMapping(value = "/department/delete/{id}")
     public ModelAndView delete(@PathVariable int id) {
-        departmentService.deleteById(id);
+        Department department = departmentService.findById(id);
+        if (department == null) {
+            LOGGER.error("Exception in 'delete(int id)' method has been triggered");
+            throw new DepartmentNotFoundException("Department not found");
+        } else {
+            departmentService.deleteById(id);
+        }
         return new ModelAndView("redirect:/department");
     }
 }

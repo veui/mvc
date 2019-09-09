@@ -26,6 +26,7 @@
                 <label>
                     <input name="title" id="title" type="text" value="${departmentList.title}" />
                 </label>
+                <div id="department-non-unique-message"></div>
             </td>
         </tr>
         <tr>

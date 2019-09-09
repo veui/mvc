@@ -53,4 +53,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void deleteById(int id) {
         departmentDao.deleteById(id);
     }
+
+    @Override
+    public Department findByTitle(String title) {
+        return departmentDao.findByTitle(title);
+    }
 }

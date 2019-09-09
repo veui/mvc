@@ -2,6 +2,7 @@ package com.arttu.mvc.controller.rest;
 
 import com.arttu.mvc.model.Department;
 import com.arttu.mvc.service.DepartmentService;
+import com.arttu.mvc.util.ValidationHelper;
 import com.arttu.mvc.validator.DepartmentValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,30 +36,32 @@ public class DepartmentRestController {
 
     @PostMapping(value = "/department/add", produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> add(@RequestBody Department department) {
+    public ResponseEntity<Map<String, Object>> add(@RequestBody Department department,
+                                                   BindingResult result) {
+        LOGGER.info("Add method of DepartmentRestController started to work");
         response = new HashMap<>();
-        HttpStatus status = HttpStatus.OK;
-        try {
+        departmentValidator.validate(department, result);
+        if (result.hasErrors()) {
+            ValidationHelper.validation(result);
+        } else {
             departmentService.add(department);
-            response.put("stat", 1);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.put("stat", 0);
-            status = HttpStatus.BAD_REQUEST;
+            response.put("message", "OK");
         }
-        return new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping(value = "/department/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Department department) {
+    public ResponseEntity<Map<String, Object>> edit(@RequestBody Department department,
+                                                    BindingResult result) {
+        LOGGER.info("Edit method of DepartmentRestController started to work");
         response = new HashMap<>();
-        try {
+        departmentValidator.validate(department, result);
+        if (result.hasErrors()) {
+            ValidationHelper.validation(result);
+        } else {
             departmentService.edit(department);
-            response.put("stat", 1);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.put("stat", 0);
+            response.put("message", "OK");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

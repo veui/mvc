@@ -10,19 +10,24 @@ function add() {
         isValid = false;
     }
     if (isValid === true) {
-        $.ajax({
-            url: "/department/add",
-            type: 'POST',
-            processData: false,
-            data: JSON.stringify(add),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (data) {
-                if (data.stat === 1) {
-                    window.location.replace("/department")
-                }
+        fetch("/department/add", {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(add)
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            console.log(response);
+            if (response.message === 'OK') {
+                window.location.replace("/department");
             }
-        });
+            if (response.message === 'Department title is not unique') {
+                $("#department-non-unique-message").html("Department title must be unique");
+            }
+        })
     } else {
         window.alert('Your data is invalid. Please enter correct data');
     }

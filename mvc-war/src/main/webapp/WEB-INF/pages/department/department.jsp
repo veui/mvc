@@ -11,7 +11,7 @@
     <table id="departmentTable">
         <tr>
             <th>Department ID</th>
-            <th>Username</th>
+            <th>Department</th>
         </tr>
         <c:choose>
             <c:when test="${department != null}">

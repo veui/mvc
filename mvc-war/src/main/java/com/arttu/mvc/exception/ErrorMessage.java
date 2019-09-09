@@ -1,11 +1,11 @@
-package com.arttu.mvc.exception.client;
+package com.arttu.mvc.exception;
 
 import java.util.Objects;
 
-public class ClientErrorMessage {
+public class ErrorMessage {
     private String message;
 
-    ClientErrorMessage(String message) {
+    public ErrorMessage(String message) {
         this.message = message;
     }
 
@@ -21,7 +21,7 @@ public class ClientErrorMessage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClientErrorMessage that = (ClientErrorMessage) o;
+        ErrorMessage that = (ErrorMessage) o;
         return Objects.equals(message, that.message);
     }
 
