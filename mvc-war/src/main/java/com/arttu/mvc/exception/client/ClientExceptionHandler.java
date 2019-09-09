@@ -2,6 +2,7 @@ package com.arttu.mvc.exception.client;
 
 import com.arttu.mvc.controller.ClientController;
 import com.arttu.mvc.controller.rest.ClientRestController;
+import com.arttu.mvc.exception.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,20 +15,20 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class ClientExceptionHandler {
 
     @ExceptionHandler(ClientIsNotUniqueRestException.class)
-    protected ResponseEntity<ClientErrorMessage> handleClientIsNotUniqueException() {
-        return new ResponseEntity<>(new ClientErrorMessage("Client is not unique"),
+    protected ResponseEntity<ErrorMessage> handleClientIsNotUniqueException() {
+        return new ResponseEntity<>(new ErrorMessage("Client is not unique"),
                 HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EmailIsNotUniqueRestException.class)
-    protected ResponseEntity<ClientErrorMessage> handleEmailIsNotUniqueException() {
-        return new ResponseEntity<>(new ClientErrorMessage("Email is not unique"),
+    protected ResponseEntity<ErrorMessage> handleEmailIsNotUniqueException() {
+        return new ResponseEntity<>(new ErrorMessage("Email is not unique"),
                 HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ClientNotFoundRestException.class)
-    protected ResponseEntity<ClientErrorMessage> handleClientNotFoundRestException() {
-        return new ResponseEntity<>(new ClientErrorMessage("Client not found"),
+    protected ResponseEntity<ErrorMessage> handleClientNotFoundRestException() {
+        return new ResponseEntity<>(new ErrorMessage("Client not found"),
                 HttpStatus.NOT_FOUND);
     }
 
