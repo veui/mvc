@@ -26,6 +26,7 @@
                 <label>
                     <input name="item" id="item" type="text" value="${itemList.item}" />
                 </label>
+                <div id="item-non-unique-message"></div>
             </td>
         </tr>
         <tr>

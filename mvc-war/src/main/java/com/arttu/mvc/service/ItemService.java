@@ -11,6 +11,7 @@ public interface ItemService {
     void deleteById(int id);
 
     Item findById(int id);
+    Item findByTitle(String title);
     List<Item> findAll();
     List<Item> findAllHierarchicalItem();
     List<Item> findAllHierarchicalSpec();

@@ -3,6 +3,7 @@ package com.arttu.mvc.dao.enums;
 public enum ItemQueries {
     SQL_FIND_ALL("SELECT * FROM ITEM"),
     SQL_FIND_BY_ID("select * from ITEM where item_id = ?"),
+    SQL_FIND_BY_TITLE("select * from item where title = ?"),
     SQL_INSERT("insert into ITEM" +
             "(item, price, specialty_id) " +
             "values (?, ?, ?)"),

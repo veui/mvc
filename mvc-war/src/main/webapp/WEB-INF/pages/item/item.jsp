@@ -22,11 +22,11 @@
                     <td><c:out value="${item.item}" /></td>
                     <td><c:out value="${item.price}" /></td>
                     <td>
-                        <a href="/specialty/find/<c:out value='${item.specialtyId}' />">
+                        <a href="../../specialty/find/<c:out value='${item.specialtyId}' />">
                                 ${item.specialtyId}</a>
                     </td>
-                    <td><a href="item/edit/${item.id}">Edit</a></td>
-                    <td><a href="item/delete/${item.id}">Delete</a></td>
+                    <td><a href="../../item/edit/${item.id}">Edit</a></td>
+                    <td><a href="../../item/delete/${item.id}">Delete</a></td>
                 </tr>
             </c:when>
             <c:otherwise>
@@ -35,11 +35,11 @@
                         <td><c:out value="${it.id}" /></td>
                         <td><c:out value="${it.item}" /></td>
                         <td><c:out value="${it.price}" /></td>
-                        <td><a href="/specialty/find/<c:out value='${it.specialtyId}' />">
+                        <td><a href="../../specialty/find/<c:out value='${it.specialtyId}' />">
                                 ${it.specialtyId}
                         </td>
-                        <td><a href="item/edit/${it.id}">Edit</a></td>
-                        <td><a href="item/delete/${it.id}">Delete</a></td>
+                        <td><a href="../../item/edit/${it.id}">Edit</a></td>
+                        <td><a href="../../item/delete/${it.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>

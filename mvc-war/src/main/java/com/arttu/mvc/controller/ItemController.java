@@ -1,26 +1,28 @@
 package com.arttu.mvc.controller;
 
+import com.arttu.mvc.exception.item.ItemNotFoundException;
+import com.arttu.mvc.exception.specialty.SpecialtyNotFoundException;
 import com.arttu.mvc.model.Item;
+import com.arttu.mvc.model.Specialty;
 import com.arttu.mvc.service.ItemService;
 import com.arttu.mvc.service.SpecialtyService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-@RestController
+@Controller
 public class ItemController {
 
     private static final Logger LOGGER = LogManager.getLogger(ItemController.class);
-    private ItemService itemService;
-    private SpecialtyService specialtyService;
+    private final ItemService itemService;
+    private final SpecialtyService specialtyService;
 
     @Autowired
     public ItemController(ItemService itemService, SpecialtyService specialtyService) {
@@ -31,7 +33,9 @@ public class ItemController {
     @GetMapping("/item")
     public ModelAndView item() {
         ModelAndView modelAndView = new ModelAndView("item/item");
-        modelAndView.addObject("itemList", itemService.findAll());
+        List<Item> itemList = itemService.findAll();
+        if (itemList == null) throw new ItemNotFoundException("Item not found");
+        modelAndView.addObject("itemList", itemList);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
@@ -39,7 +43,9 @@ public class ItemController {
     @GetMapping("/item/find/{id}")
     public ModelAndView findById(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("item/item");
-        modelAndView.addObject("item", itemService.findById(id));
+        Item item = itemService.findById(id);
+        if (item == null) throw new ItemNotFoundException("Item not found");
+        modelAndView.addObject("item", item);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
@@ -47,55 +53,33 @@ public class ItemController {
     @GetMapping("/item/add")
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("item/addItem");
-        modelAndView.addObject("specialtyList", specialtyService.findAll());
+        List<Specialty> specialties = specialtyService.findAll();
+        if (specialties == null) throw new SpecialtyNotFoundException("Specialty not found");
+        modelAndView.addObject("specialtyList", specialties);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
-    }
-
-    @PostMapping(value = "/item/add", produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> add(@RequestBody Item item) {
-        Map<String, Object> response = new HashMap<>();
-        HttpStatus status = HttpStatus.OK;
-        try {
-            itemService.add(item);
-            response.put("stat", 1);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.put("stat", 0);
-            status = HttpStatus.NOT_FOUND;
-        }
-        return new ResponseEntity<>(response, status);
     }
 
     @GetMapping(value = "/item/edit/{id}")
     public ModelAndView edit(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("item/editItem");
-        modelAndView.addObject("specialtyList", specialtyService.findAll());
-        modelAndView.addObject("itemList", itemService.findById(id));
+        List<Specialty> specialties = specialtyService.findAll();
+        Item item = itemService.findById(id);
+        if (specialties == null) throw new SpecialtyNotFoundException("Specialty not found");
+        if (item == null) throw new ItemNotFoundException("Item not found");
+        modelAndView.addObject("specialtyList", specialties);
+        modelAndView.addObject("itemList", item);
         return modelAndView;
-    }
-
-    @PostMapping(value = "/item/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Item item) {
-        Map<String, Object> response = new HashMap<>();
-        HttpStatus status = HttpStatus.OK;
-        try {
-            itemService.edit(item);
-            response.put("stat", 1);
-        } catch (Exception e) {
-            LOGGER.error(e);
-            response.put("stat", 0);
-            status = HttpStatus.BAD_REQUEST;
-        }
-        return new ResponseEntity<>(response, status);
     }
 
     @GetMapping(value = "/item/delete/{id}")
     public ModelAndView delete(@PathVariable int id) {
-
-        itemService.deleteById(id);
+        Item item = itemService.findById(id);
+        if (item == null) {
+            throw new ItemNotFoundException("Item not found");
+        } else {
+            itemService.deleteById(id);
+        }
         return new ModelAndView("redirect:/item");
     }
 }

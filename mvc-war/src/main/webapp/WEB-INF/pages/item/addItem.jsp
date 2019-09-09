@@ -22,6 +22,7 @@
             <label>
                 <input name="item" id="item" type="text" />
             </label>
+            <div id="item-non-unique-message"></div>
         </td>
     </tr>
     <tr>

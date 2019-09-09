@@ -127,6 +127,28 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
+    public Item findByTitle(String title) {
+        Item result = new Item();
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement(
+                    ItemQueries.SQL_FIND_BY_TITLE.getValue())) {
+                statement.setString(1, title);
+                try(ResultSet rs = statement.executeQuery()) {
+                    while (rs.next()) {
+                        result.setId(rs.getInt(1));
+                        result.setItem(rs.getString(2));
+                        result.setPrice(rs.getFloat(3));
+                        result.setSpecialtyId(rs.getInt(4));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return result;
+    }
+
+    @Override
     public List<Item> hierarchicalItem() {
         List<Item> result = new ArrayList<>();
         try(Connection connection = dataSource.getConnection()) {
