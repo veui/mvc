@@ -12,18 +12,25 @@ function edit() {
         isValid = false;
     }
     if (isValid === true) {
-        $.ajax({
-            url: "/specialty/edit",
-            type: 'POST',
-            processData: false,
-            data: JSON.stringify(edit),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (data) {
-                if (data.stat === 1) {
-                    window.location.assign("/specialty");
-                }
+        fetch("/specialty/edit",{
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(edit)
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            console.log(response);
+            if (response.message === 'OK') {
+                window.location.replace("/specialty");
             }
+            if (response.message === 'Specialty is not unique') {
+                $("#title-non-unique-message").html("This specialty is unavailable.");
+            }
+        }).catch (error => {
+            console.log(error)
         })
     } else {
         window.alert('Your data is invalid. Please enter correct data');

@@ -29,9 +29,9 @@
                     <tr>
                         <td><c:out value="${spec.id}" /></td>
                         <td><c:out value="${spec.title}" /></td>
-                        <td><a href="../department/find/<c:out value='${spec.departmentId}' />">${spec.departmentId}</a></td>
-                        <td><a href="specialty/edit/${spec.id}">Edit</a></td>
-                        <td><a href="specialty/delete/${spec.id}">Delete</a></td>
+                        <td><a href="../../department/find/<c:out value='${spec.departmentId}' />">${spec.departmentId}</a></td>
+                        <td><a href="../../specialty/edit/${spec.id}">Edit</a></td>
+                        <td><a href="../../specialty/delete/${spec.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>

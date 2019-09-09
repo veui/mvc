@@ -26,6 +26,7 @@
                 <label>
                     <input name="title" id="title" type="text" value="${specialtyList.title}" />
                 </label>
+                <div id="title-non-unique-message"></div>
             </td>
         </tr>
         <tr>
