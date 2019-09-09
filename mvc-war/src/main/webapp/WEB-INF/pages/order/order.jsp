@@ -24,10 +24,10 @@
                 <td><c:out value="${ord.date}" /></td>
                 <td><c:out value="${ord.amount}" /></td>
                 <td><c:out value="${ord.cost}" /></td>
-                <td><a href="/client/find/<c:out value='${ord.clientId}' />">${ord.clientId}</a></td>
-                <td><a href="/item/find/<c:out value='${ord.itemId}' />">${ord.itemId}</a></td>
-                <td><a href="order/edit/${ord.id}">Edit</a></td>
-                <td><a href="order/delete/${ord.id}">Delete</a></td>
+                <td><a href="../../client/find/<c:out value='${ord.clientId}' />">${ord.clientId}</a></td>
+                <td><a href="../../item/find/<c:out value='${ord.itemId}' />">${ord.itemId}</a></td>
+                <td><a href="../../order/edit/${ord.id}">Edit</a></td>
+                <td><a href="../../order/delete/${ord.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

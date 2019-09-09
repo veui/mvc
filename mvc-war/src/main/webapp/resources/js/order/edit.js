@@ -30,18 +30,25 @@ function edit() {
         isValid = false;
     }
     if (isValid === true) {
-        $.ajax({
-            url: "/order/edit",
-            type: 'POST',
-            processData: false,
-            data: JSON.stringify(edit),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (data) {
-                if (data.stat === 1) {
-                    window.location.replace("/order");
-                }
+        fetch("/order/edit",{
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(edit)
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            console.log(response);
+            if (response.message === 'OK') {
+                window.location.replace("/order");
             }
+            if (response.message === 'Order is not unique') {
+                window.alert("Order is not unique");
+            }
+        }).catch (error => {
+            console.log(error)
         })
     } else {
         window.alert('Your data is invalid. Please enter correct data');
