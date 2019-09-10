@@ -8,6 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Add item</title>
+    <script src="<spring:url value="/resources/js/item/add.js" />"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="<spring:url value="/resources/css/item/add.css" />" rel="stylesheet" type="text/css">
 </head>

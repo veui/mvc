@@ -21,16 +21,12 @@ import java.util.List;
 public class SpecialtyController {
 
     private static final Logger LOGGER = LogManager.getLogger(SpecialtyController.class);
-    private SpecialtyService specialtyService;
-    private DepartmentService departmentService;
+    private final SpecialtyService specialtyService;
+    private final DepartmentService departmentService;
 
     @Autowired
-    public SpecialtyController(SpecialtyService specialtyService) {
+    public SpecialtyController(SpecialtyService specialtyService, DepartmentService departmentService) {
         this.specialtyService = specialtyService;
-    }
-
-    @Autowired
-    public void setDepartmentService(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
@@ -38,10 +34,6 @@ public class SpecialtyController {
     public ModelAndView department() {
         ModelAndView modelAndView = new ModelAndView("specialty/specialty");
         List<Specialty> specialties = specialtyService.findAll();
-        if (specialties == null) {
-            LOGGER.error("department() method of SpecailtyController class");
-            throw new SpecialtyNotFoundException("Specialty not found");
-        }
         modelAndView.addObject("specialtyList", specialties);
         return modelAndView;
     }
@@ -51,13 +43,10 @@ public class SpecialtyController {
         ModelAndView modelAndView = new ModelAndView("specialty/specialty");
         Specialty specialty = specialtyService.findById(id);
         List<Item> itemList = specialtyService.findAttachedItems(id);
-        if (specialty == null) {
+        LOGGER.info(specialty.getId() + " " + specialty.toString());
+        if (specialty.getId() == 0) {
             LOGGER.error("findById method of SpecialtyController class");
             throw new SpecialtyNotFoundException("Specialty not found");
-        }
-        if (itemList == null) {
-            LOGGER.error("findById method of SpecialtyController class");
-            throw new SpecialtyNotFoundException("Item not found");
         }
         modelAndView.addObject("specialty", specialty);
         modelAndView.addObject("itemList", itemList);
@@ -68,7 +57,7 @@ public class SpecialtyController {
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("specialty/addSpecialty");
         List<Department> departments = departmentService.findAll();
-        if (departments == null) throw new DepartmentNotFoundException("Department not found");
+        if (departments.isEmpty()) throw new DepartmentNotFoundException("Department not found");
         modelAndView.addObject("departmentList", departments);
         return modelAndView;
     }
@@ -78,11 +67,11 @@ public class SpecialtyController {
         ModelAndView modelAndView = new ModelAndView("specialty/editSpecialty");
         Specialty specialty = specialtyService.findById(id);
         List<Department> departments = departmentService.findAll();
-        if (specialty == null) {
+        if (specialty.getId() == 0) {
             LOGGER.error("Edit method of SpecialtyController class");
             throw new SpecialtyNotFoundException("Specialty not found");
         }
-        if (departments == null) {
+        if (departments.isEmpty()) {
             LOGGER.error("Edit method of SpecialtyController class");
             throw new DepartmentNotFoundException("Department not found");
         }
@@ -94,7 +83,7 @@ public class SpecialtyController {
     @GetMapping(value = "/specialty/delete/{id}")
     public ModelAndView delete(@PathVariable int id) {
         Specialty specialty = specialtyService.findById(id);
-        if (specialty == null) {
+        if (specialty.getId() == 0) {
             throw new SpecialtyNotFoundException("Specialty not found");
         } else {
             specialtyService.deleteById(id);

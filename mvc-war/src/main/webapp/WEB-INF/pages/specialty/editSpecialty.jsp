@@ -7,6 +7,7 @@
 <head>
     <title>Edit Specialty</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="<spring:url value="/resources/js/specialty/edit.js" />" rel="script" type="text/javascript"></script>
     <link href="<spring:url value="/resources/css/specialty/edit.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -16,7 +17,7 @@
             <td>ID</td>
             <td>
                 <label>
-                    <input name="id" id="id" value="${specialtyList.title}" readonly />
+                    <input name="id" id="id" value="${specialtyList.id}" readonly />
                 </label>
             </td>
         </tr>

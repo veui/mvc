@@ -14,7 +14,8 @@ public class ItemExceptionHandler {
 
     @ExceptionHandler(ItemNotFoundException.class)
     public ModelAndView handleItemNotFoundException(ItemNotFoundException ex) {
-        ModelAndView modelAndView = new ModelAndView("error");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
         modelAndView.addObject("msg", ex.getMessage());
         return modelAndView;
     }

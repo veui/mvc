@@ -31,10 +31,6 @@ public class DepartmentController {
     public ModelAndView department() {
         ModelAndView modelAndView = new ModelAndView("department/department");
         List<Department> findAll = departmentService.findAll();
-        if (findAll == null) {
-            LOGGER.error("Exception in department method has been triggered");
-            throw new DepartmentNotFoundException("Department not found.");
-        }
         modelAndView.addObject("departmentList", findAll);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
@@ -45,11 +41,11 @@ public class DepartmentController {
         ModelAndView modelAndView = new ModelAndView("department/department");
         Department department = departmentService.findById(id);
         List<Specialty> specialties = departmentService.findAttachedSpecialties(id);
-        if (department == null) {
+        if (department.getId() == 0) {
             LOGGER.error("Exception in 'findById(int id)' method has been triggered");
             throw new DepartmentNotFoundException("Department not found.");
         }
-        if (specialties == null) {
+        if (specialties.isEmpty()) {
             LOGGER.error("Exception in 'findById(int id)' method has been triggered");
             throw new SpecialtyNotFoundException("Specialty not found");
         }
@@ -68,7 +64,7 @@ public class DepartmentController {
     public ModelAndView edit(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("department/editDepartment");
         Department department = departmentService.findById(id);
-        if (department == null) {
+        if (department.getId() == 0) {
             LOGGER.error("Exception in 'edit(int id)' method has been triggered");
             throw new DepartmentNotFoundException("Department not found.");
         }
@@ -80,7 +76,7 @@ public class DepartmentController {
     @GetMapping(value = "/department/delete/{id}")
     public ModelAndView delete(@PathVariable int id) {
         Department department = departmentService.findById(id);
-        if (department == null) {
+        if (department.getId() == 0) {
             LOGGER.error("Exception in 'delete(int id)' method has been triggered");
             throw new DepartmentNotFoundException("Department not found");
         } else {

@@ -9,9 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,17 +21,10 @@ public class ClientController {
     private static final Logger LOGGER = LogManager.getLogger(ClientController.class);
 
     private final ClientService clientService;
-    private final ClientValidator clientValidator;
 
     @Autowired
     public ClientController(ClientService clientService, ClientValidator clientValidator) {
         this.clientService = clientService;
-        this.clientValidator = clientValidator;
-    }
-
-    @InitBinder
-    public void dataBind(WebDataBinder binder) {
-        binder.addValidators(clientValidator);
     }
 
     @GetMapping(value = "/client")
@@ -41,7 +32,6 @@ public class ClientController {
         LOGGER.info("Find all method started to work");
         ModelAndView modelAndView = new ModelAndView("client/client");
         List<Client> list = clientService.findAll();
-        if (list == null) throw new ClientNotFoundException("Client not found. Please try another one");
         modelAndView.addObject("clientList", list);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;

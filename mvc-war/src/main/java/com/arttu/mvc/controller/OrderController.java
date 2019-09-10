@@ -38,7 +38,6 @@ public class OrderController {
     public ModelAndView department() {
         ModelAndView modelAndView = new ModelAndView("order/order");
         List<Order> orderList = orderService.findAll();
-        if (orderList == null) throw new OrderNotFoundException("Order not found");
         modelAndView.addObject("orderList", orderList);
         return modelAndView;
     }
@@ -48,8 +47,8 @@ public class OrderController {
         ModelAndView modelAndView = new ModelAndView("order/addOrder");
         List<Item> itemList = itemService.findAll();
         List<Client> clientList = clientService.findAll();
-        if (itemList == null) throw new ItemNotFoundException("Item not found");
-        if (clientList == null) throw new ClientNotFoundException("Client not found");
+        if (itemList.isEmpty()) throw new ItemNotFoundException("Item not found");
+        if (clientList.isEmpty()) throw new ClientNotFoundException("Client not found");
         modelAndView.addObject("itemList", itemList);
         modelAndView.addObject("clientList", clientList);
         return modelAndView;
@@ -61,9 +60,9 @@ public class OrderController {
         Item item = itemService.findById(id);
         List<Item> itemList = itemService.findAll();
         List<Client> clientList = clientService.findAll();
-        if (item == null) throw new ItemNotFoundException("Item not found");
-        if (itemList == null) throw new ItemNotFoundException("Item not found");
-        if (clientList == null) throw new ClientNotFoundException("Client not found");
+        if (item.getId() == 0) throw new ItemNotFoundException("Item not found");
+        if (itemList.isEmpty()) throw new ItemNotFoundException("Item not found");
+        if (clientList.isEmpty()) throw new ClientNotFoundException("Client not found");
         modelAndView.addObject("item", item);
         modelAndView.addObject("itemList", itemList);
         modelAndView.addObject("clientList", clientList);
@@ -75,8 +74,8 @@ public class OrderController {
         ModelAndView modelAndView = new ModelAndView("order/editOrder");
         List<Item> itemList = itemService.findAll();
         List<Client> clientList = clientService.findAll();
-        if (itemList == null) throw new ItemNotFoundException("Item not found");
-        if (clientList == null) throw new ClientNotFoundException("Client not found");
+        if (itemList.isEmpty()) throw new ItemNotFoundException("Item not found");
+        if (clientList.isEmpty()) throw new ClientNotFoundException("Client not found");
         modelAndView.addObject("itemList", itemList);
         modelAndView.addObject("clientList", clientList);
         return modelAndView;
@@ -88,9 +87,9 @@ public class OrderController {
         List<Item> itemList = itemService.findAll();
         List<Client> clientList = clientService.findAll();
         Order order = orderService.findById(id);
-        if (itemList == null) throw new ItemNotFoundException("Item not found");
-        if (clientList == null) throw new ClientNotFoundException("Client not found");
-        if (order == null) throw new OrderNotFoundException("Order not found");
+        if (itemList.isEmpty()) throw new ItemNotFoundException("Item not found");
+        if (clientList.isEmpty()) throw new ClientNotFoundException("Client not found");
+        if (order.getId() == 0) throw new OrderNotFoundException("Order not found");
         modelAndView.addObject("clientList", clientList);
         modelAndView.addObject("itemList", itemList);
         modelAndView.addObject("orderList", order);
@@ -100,7 +99,7 @@ public class OrderController {
     @GetMapping(value = "/order/delete/{id}")
     public ModelAndView delete(@PathVariable int id) {
         Order order = orderService.findById(id);
-        if (order == null) {
+        if (order.getId() == 0) {
             throw new OrderNotFoundException("Order not found");
         } else {
             orderService.deleteById(id);

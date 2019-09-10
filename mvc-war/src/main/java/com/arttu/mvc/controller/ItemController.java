@@ -34,7 +34,6 @@ public class ItemController {
     public ModelAndView item() {
         ModelAndView modelAndView = new ModelAndView("item/item");
         List<Item> itemList = itemService.findAll();
-        if (itemList == null) throw new ItemNotFoundException("Item not found");
         modelAndView.addObject("itemList", itemList);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
@@ -44,9 +43,11 @@ public class ItemController {
     public ModelAndView findById(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("item/item");
         Item item = itemService.findById(id);
-        if (item == null) throw new ItemNotFoundException("Item not found");
+        if (item.getId() == 0) {
+            LOGGER.error("findByID(int id) method of ItemController class has been triggered");
+            throw new ItemNotFoundException("Item not found");
+        }
         modelAndView.addObject("item", item);
-        modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
 
@@ -54,9 +55,8 @@ public class ItemController {
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("item/addItem");
         List<Specialty> specialties = specialtyService.findAll();
-        if (specialties == null) throw new SpecialtyNotFoundException("Specialty not found");
+        if (specialties.isEmpty()) throw new SpecialtyNotFoundException("Specialty not found");
         modelAndView.addObject("specialtyList", specialties);
-        modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
 
@@ -65,8 +65,8 @@ public class ItemController {
         ModelAndView modelAndView = new ModelAndView("item/editItem");
         List<Specialty> specialties = specialtyService.findAll();
         Item item = itemService.findById(id);
-        if (specialties == null) throw new SpecialtyNotFoundException("Specialty not found");
-        if (item == null) throw new ItemNotFoundException("Item not found");
+        if (specialties.isEmpty()) throw new SpecialtyNotFoundException("Specialty not found");
+        if (item.getId() == 0) throw new ItemNotFoundException("Item not found");
         modelAndView.addObject("specialtyList", specialties);
         modelAndView.addObject("itemList", item);
         return modelAndView;
@@ -75,7 +75,7 @@ public class ItemController {
     @GetMapping(value = "/item/delete/{id}")
     public ModelAndView delete(@PathVariable int id) {
         Item item = itemService.findById(id);
-        if (item == null) {
+        if (item.getId() == 0) {
             throw new ItemNotFoundException("Item not found");
         } else {
             itemService.deleteById(id);

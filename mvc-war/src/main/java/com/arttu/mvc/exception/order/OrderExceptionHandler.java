@@ -14,7 +14,8 @@ public class OrderExceptionHandler {
 
     @ExceptionHandler(OrderNotFoundException.class)
     public ModelAndView handleOrderNotFoundException(OrderNotFoundException ex) {
-        ModelAndView modelAndView = new ModelAndView("error");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
         modelAndView.addObject("msg", ex.getMessage());
         return modelAndView;
     }
