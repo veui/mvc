@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -54,23 +55,13 @@ public class ClientController {
     }
 
     @GetMapping(value = "/client/edit/{id}")
-    public ModelAndView edit(@PathVariable int id) {
+    public @ResponseBody ModelAndView edit(@PathVariable int id) {
         LOGGER.info("Edit method(GET) started to work");
         ModelAndView modelAndView = new ModelAndView("client/editClient");
         Client client = clientService.findById(id);
         if (client == null) throw new ClientNotFoundException("Client not found. Please try another one");
         modelAndView.addObject("clientList", clientService.findById(id));
+        modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
-    }
-
-    @GetMapping(value = "/client/delete/{id}")
-    public ModelAndView delete(@PathVariable int id) {
-        Client client = clientService.findById(id);
-        if (client == null) {
-            throw new ClientNotFoundException("Client not found. Please try another one");
-        } else {
-            clientService.deleteById(id);
-        }
-        return new ModelAndView("redirect:/client");
     }
 }

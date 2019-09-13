@@ -1,5 +1,6 @@
 package com.arttu.mvc.controller.rest;
 
+import com.arttu.mvc.exception.client.ClientNotFoundException;
 import com.arttu.mvc.model.Client;
 import com.arttu.mvc.service.ClientService;
 import com.arttu.mvc.util.ValidationHelper;
@@ -11,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,17 +51,30 @@ public class ClientRestController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/client/edit", consumes = {MediaType.APPLICATION_JSON_VALUE},
+    @PutMapping(value = "/client/edit", consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Map<String, Object>> edit(@RequestBody Client client,
                                                     BindingResult result) {
-        LOGGER.info("Edit method(POST) started to work");
+        LOGGER.info("Edit method(PUT) started to work");
         Map<String, Object> response = new HashMap<>();
         clientValidator.validate(client, result);
         if (result.hasErrors()) {
             ValidationHelper.validation(result);
         } else {
             clientService.edit(client);
+            response.put("message", "OK");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "client/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        Map<String, Object> response = new HashMap<>();
+        Client client = clientService.findById(id);
+        if (client.getId() == 0) {
+            throw new ClientNotFoundException("Client not found");
+        } else {
+            clientService.deleteById(id);
             response.put("message", "OK");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);

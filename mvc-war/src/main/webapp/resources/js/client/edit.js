@@ -36,7 +36,7 @@ function edit() {
     }
     if (isValid === true) {
         fetch("/client/edit", {
-            method: 'post',
+            method: 'put',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function edit() {
         }).then(response => {
             console.log(response);
             if (response.message === 'OK') {
-                window.location.replace("/client");
+                window.location.href = "/client";
             }
             if (response.message === 'Client is not unique') {
                 $("#username-non-unique-message").html("This username is unavailable.");

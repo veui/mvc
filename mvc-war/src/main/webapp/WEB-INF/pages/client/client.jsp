@@ -5,6 +5,8 @@
 <html>
 <head>
     <title>Main page of the client</title>
+    <script src="<spring:url value="/resources/js/client/redirect.js" />"></script>
+    <script src="<spring:url value="/resources/js/client/remove.js" />"></script>
     <link href="<spring:url value="/resources/css/client/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -28,8 +30,8 @@
                     <td><c:out value="${client.lastName}" /></td>
                     <td><c:out value="${client.email}" /></td>
                     <td><c:out value="${client.phone}" /></td>
-                    <td><a href="../../client/edit/${client.id}">Edit</a></td>
-                    <td><a href="../../client/delete/${client.id}">Delete</a></td>
+                    <td><button type="button" onclick="redirect_edit(${client.id})">Edit</button></td>
+                    <td><button type="button" onclick="remove(${client.id})">Delete</button></td>
                 </tr>
             </c:when>
             <c:otherwise>
@@ -42,14 +44,14 @@
                         <td><c:out value="${client.lastName}" /></td>
                         <td><c:out value="${client.email}" /></td>
                         <td><c:out value="${client.phone}" /></td>
-                        <td><a href="../../client/edit/${client.id}">Edit</a></td>
-                        <td><a href="../../client/delete/${client.id}">Delete</a></td>
+                        <td><button onclick="redirect_edit(${client.id})">Edit</button></td>
+                        <td><button onclick="remove(${client.id})">Delete</button></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>
         </c:choose>
     </table>
 <br />
-<a href="${pageContext.request.contextPath}/client/add">Add client</a>
+    <button type="button" onclick="redirect_add()">Add client</button>
 </body>
 </html>

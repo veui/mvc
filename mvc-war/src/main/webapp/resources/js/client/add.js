@@ -44,7 +44,7 @@ function add() {
         }).then(response => {
             console.log(response);
             if (response.message === 'OK') {
-                window.location.replace("/client");
+                window.location.href = "/client";
             }
             if (response.message === 'Client is not unique') {
                 $("#username-non-unique-message").html("This username is unavailable.");
