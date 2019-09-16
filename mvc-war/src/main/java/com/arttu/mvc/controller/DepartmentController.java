@@ -72,16 +72,4 @@ public class DepartmentController {
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
-
-    @GetMapping(value = "/department/delete/{id}")
-    public ModelAndView delete(@PathVariable int id) {
-        Department department = departmentService.findById(id);
-        if (department.getId() == 0) {
-            LOGGER.error("Exception in 'delete(int id)' method has been triggered");
-            throw new DepartmentNotFoundException("Department not found");
-        } else {
-            departmentService.deleteById(id);
-        }
-        return new ModelAndView("redirect:/department");
-    }
 }

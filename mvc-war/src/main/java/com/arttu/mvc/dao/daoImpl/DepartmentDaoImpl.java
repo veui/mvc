@@ -95,14 +95,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public Department findByTitle(String title) {
         LOGGER.info("Method find department by title  started to work");
-        Department department = null;
+        Department department = new Department();
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement preparedStatement =
                         connection.prepareStatement(DepartmentQueries.SQL_FIND_BY_TITLE.getValue())) {
                 preparedStatement.setString(1, title);
                 try(ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
-                        department = new Department();
                         department.setId(resultSet.getInt(1));
                         department.setTitle(resultSet.getString(2));
                     }

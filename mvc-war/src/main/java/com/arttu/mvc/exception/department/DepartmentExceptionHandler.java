@@ -25,4 +25,10 @@ public class DepartmentExceptionHandler {
         modelAndView.addObject("msg", exc.getMessage());
         return modelAndView;
     }
+
+    @ExceptionHandler({DepartmentNotFoundRestException.class})
+    protected ResponseEntity<?> handleDepartmentNotFoundRestException() {
+        return new ResponseEntity<>(new ErrorMessage("Department not found"),
+                HttpStatus.NOT_FOUND);
+    }
 }

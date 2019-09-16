@@ -12,7 +12,7 @@ function edit() {
     }
     if (isValid === true) {
         fetch("/department/edit", {
-            method: 'post',
+            method: 'put',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

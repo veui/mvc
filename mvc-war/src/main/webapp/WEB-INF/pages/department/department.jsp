@@ -5,6 +5,8 @@
 <html>
 <head>
     <title>Main page of the department</title>
+    <script src="<spring:url value="/resources/js/department/redirect.js" />"></script>
+    <script src="<spring:url value="/resources/js/department/redirect.js" />"></script>
     <link href="<spring:url value="/resources/css/department/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -17,16 +19,16 @@
             <c:when test="${department != null}">
                 <td><c:out value="${department.id}" /></td>
                 <td><c:out value="${department.title}" /></td>
-                <td><a href="../../department/edit/${department.id}">Edit</a></td>
-                <td><a href="../../department/delete/${department.id}">Delete</a></td>
+                <td><button onclick="redirect_edit(${department.id})">Edit</button></td>
+                <td><button onclick="redirect_delete(${department.id})">Delete</button></td>
             </c:when>
             <c:otherwise>
                 <c:forEach items="${departmentList}" var="department">
                     <tr>
                         <td><c:out value="${department.id}" /></td>
                         <td><c:out value="${department.title}" /></td>
-                        <td><a href="../../department/edit/${department.id}">Edit</a></td>
-                        <td><a href="../../department/delete/${department.id}">Delete</a></td>
+                        <td><button onclick="redirect_edit(${department.id})">Edit</button></td>
+                        <td><button onclick="redirect_delete(${department.id})">Delete</button></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>
@@ -42,15 +44,15 @@
             <th>
             <c:forEach items="${specialtyList}" var="specialty">
                 <tr>
-                    <td><c:out value="${specialty.id}" /></td>
+                    <td onclick="redirect_find_spec(${specialty.id})"><c:out value="${specialty.id}" /></td>
                     <td><c:out value="${specialty.title}" /></td>
-                    <td><a href="../../department/find/<c:out value='${specialty.departmentId}' />">
-                            ${specialty.departmentId}</a></td>
+                    <td><button onclick="redirect_find(${specialty.departmentId})">
+                            ${specialty.departmentId}</button></td>
                 </tr>
             </c:forEach>
         </c:if>
     </table>
 <br />
-<a href="${pageContext.request.contextPath}/department/add">Add department</a>
+    <button onclick="redirect_add()">Add</button>
 </body>
 </html>
