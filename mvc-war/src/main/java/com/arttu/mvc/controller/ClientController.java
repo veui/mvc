@@ -3,7 +3,6 @@ package com.arttu.mvc.controller;
 import com.arttu.mvc.exception.client.ClientNotFoundException;
 import com.arttu.mvc.model.Client;
 import com.arttu.mvc.service.ClientService;
-import com.arttu.mvc.validator.ClientValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @Autowired
-    public ClientController(ClientService clientService, ClientValidator clientValidator) {
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 

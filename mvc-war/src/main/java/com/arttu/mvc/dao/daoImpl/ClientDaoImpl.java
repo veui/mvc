@@ -196,4 +196,27 @@ public class ClientDaoImpl implements ClientDao {
         }
         return client;
     }
+
+    @Override
+    public boolean editClient(Client client) {
+        LOGGER.info("Method editClient started to work " + client.toString());
+        boolean isOk;
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement(ClientQueries.SQL_UPDATE.getValue())) {
+                statement.setString(1, client.getUsername());
+                statement.setString(2, client.getPassword());
+                statement.setString(3, client.getFirstName());
+                statement.setString(4, client.getLastName());
+                statement.setString(5, client.getEmail());
+                statement.setInt(6, client.getPhone());
+                statement.setInt(7, client.getId());
+                statement.executeUpdate();
+                isOk = true;
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            isOk = false;
+        }
+        return isOk;
+    }
 }

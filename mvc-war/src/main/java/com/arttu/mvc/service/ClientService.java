@@ -14,4 +14,5 @@ public interface ClientService {
     Client findByUsername(String username);
 
     boolean deleteById(int id);
+    boolean editClient(Client client);
 }

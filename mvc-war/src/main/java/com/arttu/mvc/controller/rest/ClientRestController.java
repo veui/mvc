@@ -1,6 +1,7 @@
 package com.arttu.mvc.controller.rest;
 
 import com.arttu.mvc.exception.client.ClientNotFoundException;
+import com.arttu.mvc.exception.client.ClientNotFoundRestException;
 import com.arttu.mvc.model.Client;
 import com.arttu.mvc.service.ClientService;
 import com.arttu.mvc.util.ValidationHelper;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -53,16 +55,14 @@ public class ClientRestController {
 
     @PutMapping(value = "/client/edit", consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Client client,
-                                                    BindingResult result) {
+    public ResponseEntity<?> edit(@RequestBody Client client) {
         LOGGER.info("Edit method(PUT) started to work");
         Map<String, Object> response = new HashMap<>();
-        clientValidator.validate(client, result);
-        if (result.hasErrors()) {
-            ValidationHelper.validation(result);
-        } else {
-            clientService.edit(client);
+        boolean clientEdited = clientService.editClient(client);
+        if (clientEdited) {
             response.put("message", "OK");
+        } else {
+            throw new ClientNotFoundRestException();
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -78,5 +78,23 @@ public class ClientRestController {
             response.put("message", "OK");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "client/rest/find/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        Client client = clientService.findById(id);
+        if (client == null) {
+            throw new ClientNotFoundRestException();
+        }
+        return new ResponseEntity<>(client, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "client/rest/findAll")
+    public ResponseEntity<?> findAll() {
+        List<Client> clients = clientService.findAll();
+        if (clients.isEmpty()) {
+            throw new ClientNotFoundRestException();
+        }
+        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 }
