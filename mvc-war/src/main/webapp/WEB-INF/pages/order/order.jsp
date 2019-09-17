@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Main page of the order</title>
+    <script src="<spring:url value="/resources/js/order/redirect.js" />"></script>
     <link href="<spring:url value="/resources/css/order/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,15 +25,15 @@
                 <td><c:out value="${ord.date}" /></td>
                 <td><c:out value="${ord.amount}" /></td>
                 <td><c:out value="${ord.cost}" /></td>
-                <td><a href="../../client/find/<c:out value='${ord.clientId}' />">${ord.clientId}</a></td>
-                <td><a href="../../item/find/<c:out value='${ord.itemId}' />">${ord.itemId}</a></td>
-                <td><a href="../../order/edit/${ord.id}">Edit</a></td>
-                <td><a href="../../order/delete/${ord.id}">Delete</a></td>
+                <td onclick="redirect_find_client(${ord.id})"><c:out value='${ord.clientId}' />">${ord.clientId}</td>
+                <td onclick="redirect_find_item(${ord.id})"><c:out value='${ord.itemId}' />">${ord.itemId}</td>
+                <td><button onclick="redirect_edit(${ord.id})">Edit</button> </td>
+                <td><button onclick="redirect_delete(${ord.id})">Delete</button> </td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
 <br />
-<a href="${pageContext.request.contextPath}/order/add">Add order</a>
+<button onclick="redirect_add()">Add order</button>
 </body>
 </html>

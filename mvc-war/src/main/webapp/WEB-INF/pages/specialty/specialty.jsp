@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Main page of the specialty</title>
+    <script src="<spring:url value="/resources/js/specialty/redirect.js" />"></script>
     <link href="<spring:url value="/resources/css/specialty/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -19,9 +20,10 @@
                 <tr>
                     <td><c:out value="${specialty.id}" /></td>
                     <td><c:out value="${specialty.title}" /></td>
-                    <td><a href="../../department/find/<c:out value='${specialty.departmentId}' />">${specialty.departmentId}</a></td>
-                    <td><a href="../../specialty/edit/${specialty.id}">Edit</a></td>
-                    <td><a href="../../specialty/delete/${specialty.id}">Delete</a></td>
+                    <td><button onclick="redirect_find(${specialty.departmentId})">
+                            ${specialty.departmentId}</button></td>
+                    <td><button onclick="redirect_edit(${specialty.id})">Edit</button></td>
+                    <td><button onclick="redirect_delete(${specialty.id})">Delete</button></td>
                 </tr>
             </c:when>
             <c:otherwise>
@@ -30,8 +32,8 @@
                         <td><c:out value="${spec.id}" /></td>
                         <td><c:out value="${spec.title}" /></td>
                         <td><a href="../../department/find/<c:out value='${spec.departmentId}' />">${spec.departmentId}</a></td>
-                        <td><a href="../../specialty/edit/${spec.id}">Edit</a></td>
-                        <td><a href="../../specialty/delete/${spec.id}">Delete</a></td>
+                        <td><button onclick="redirect_edit(${spec.id})">Edit</button></td>
+                        <td><button onclick="redirect_delete(${spec.id})">Delete</button></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>
@@ -57,6 +59,6 @@
         </table>
     </c:if>
 <br />
-<a href="${pageContext.request.contextPath}/specialty/add">Add specialty</a>
+    <button onclick="redirect_add()"></button>
 </body>
 </html>

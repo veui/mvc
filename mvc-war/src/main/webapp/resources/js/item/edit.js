@@ -27,7 +27,7 @@
     }
     if (isValid === true) {
         fetch("/item/edit", {
-            method: 'post',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ function edit() {
     }
     if (isValid === true) {
         fetch("/specialty/edit",{
-            method: 'post',
+            method: 'put',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

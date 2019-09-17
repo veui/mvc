@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Main page of the item</title>
+    <script src="<spring:url value="/resources/js/item/redirect.js" />"></script>
     <link rel="stylesheet" type="text/css" href="<spring:url value="/resources/css/item/index.css" />" />
 </head>
 <body>
@@ -21,12 +22,9 @@
                     <td><c:out value="${item.id}" /></td>
                     <td><c:out value="${item.item}" /></td>
                     <td><c:out value="${item.price}" /></td>
-                    <td>
-                        <a href="../../specialty/find/<c:out value='${item.specialtyId}' />">
-                                ${item.specialtyId}</a>
-                    </td>
-                    <td><a href="../../item/edit/${item.id}">Edit</a></td>
-                    <td><a href="../../item/delete/${item.id}">Delete</a></td>
+                    <td onclick="redirect_find_spec(${item.specialtyId})"><c:out value='${item.specialtyId}' /></td>
+                    <td><button onclick="redirect_edit()">Edit</button></td>
+                    <td><button onclick="redirect_delete(${item.id})">Delete</button></td>
                 </tr>
             </c:when>
             <c:otherwise>
@@ -35,17 +33,15 @@
                         <td><c:out value="${it.id}" /></td>
                         <td><c:out value="${it.item}" /></td>
                         <td><c:out value="${it.price}" /></td>
-                        <td><a href="../../specialty/find/<c:out value='${it.specialtyId}' />">
-                                ${it.specialtyId}
-                        </td>
-                        <td><a href="../../item/edit/${it.id}">Edit</a></td>
-                        <td><a href="../../item/delete/${it.id}">Delete</a></td>
+                        <td onclick="redirect_find_spec(${item.specialtyId})"><c:out value='${item.specialtyId}' /></td>
+                        <td><button onclick="redirect_edit()">Edit</button></td>
+                        <td><button onclick="redirect_delete(${item.id})">Delete</button></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>
         </c:choose>
     </table>
 <br />
-<a href="${pageContext.request.contextPath}/item/add">Add item</a>
+    <button onclick="redirect_add()">Add</button>
 </body>
 </html>
