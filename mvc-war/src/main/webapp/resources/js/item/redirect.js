@@ -6,15 +6,16 @@ function redirect_add() {
     }).catch(error => console.log(error))
 }
 function redirect_edit(id) {
+    console.log(id);
     fetch("/item/edit/" + id, {
-        method: 'get'
+        method: 'GET'
     }).then(response => {
-        if (response.status === 200) window.location.href = '/item/edit/' + id
+        if (response.status === 200) window.location.href = '/item/edit/' + id;
     }).catch(error => console.log(error))
 }
 function redirect_delete(id) {
     fetch("/item/delete/" + id, {
-        method: 'delete'
+        method: 'DELETE'
     }).then(response => response.json())
         .then(response => {
             if (response.message === 'OK') window.location.href = '/item';

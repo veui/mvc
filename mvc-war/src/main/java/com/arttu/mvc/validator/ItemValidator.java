@@ -28,7 +28,7 @@ public class ItemValidator implements Validator {
 
         Item itemCheckTitleUniqueness = service.findByTitle(item.getItem());
 
-        if (itemCheckTitleUniqueness.getItem().equals(item.getItem())) {
+        if (itemCheckTitleUniqueness.getItem() != null) {
             errors.rejectValue("item", null, "item");
         }
     }

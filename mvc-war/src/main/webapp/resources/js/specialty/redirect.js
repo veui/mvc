@@ -33,3 +33,12 @@ function redirect_find(id) {
         }
     }).catch(error => console.log(error))
 }
+function redirect_find_department(id) {
+    fetch('/department/find/' + id, {
+        method: 'GET'
+    }).then(response => {
+        if (response.status === 200) {
+            window.location.href = '/department/find/' + id;
+        }
+    }).catch(error => console.log(error))
+}

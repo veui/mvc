@@ -22,8 +22,8 @@
                     <td><c:out value="${item.id}" /></td>
                     <td><c:out value="${item.item}" /></td>
                     <td><c:out value="${item.price}" /></td>
-                    <td onclick="redirect_find_spec(${item.specialtyId})"><c:out value='${item.specialtyId}' /></td>
-                    <td><button onclick="redirect_edit()">Edit</button></td>
+                    <td><button onclick="redirect_find_spec(${item.specialtyId})">${item.specialtyId}</button></td>
+                    <td><button onclick="redirect_edit(${item.id})">Edit</button></td>
                     <td><button onclick="redirect_delete(${item.id})">Delete</button></td>
                 </tr>
             </c:when>
@@ -33,9 +33,9 @@
                         <td><c:out value="${it.id}" /></td>
                         <td><c:out value="${it.item}" /></td>
                         <td><c:out value="${it.price}" /></td>
-                        <td onclick="redirect_find_spec(${item.specialtyId})"><c:out value='${item.specialtyId}' /></td>
-                        <td><button onclick="redirect_edit()">Edit</button></td>
-                        <td><button onclick="redirect_delete(${item.id})">Delete</button></td>
+                        <td><button onclick="redirect_find_spec(${it.specialtyId})">${it.specialtyId}</button></td>
+                        <td><button onclick="redirect_edit(${it.id})">Edit</button></td>
+                        <td><button onclick="redirect_delete(${it.id})">Delete</button></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>

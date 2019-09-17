@@ -41,7 +41,7 @@ public class DepartmentController {
         ModelAndView modelAndView = new ModelAndView("department/department");
         Department department = departmentService.findById(id);
         List<Specialty> specialties = departmentService.findAttachedSpecialties(id);
-        if (department.getId() == 0) {
+        if (department == null) {
             LOGGER.error("Exception in 'findById(int id)' method has been triggered");
             throw new DepartmentNotFoundException("Department not found.");
         }

@@ -20,7 +20,7 @@
                 <tr>
                     <td><c:out value="${specialty.id}" /></td>
                     <td><c:out value="${specialty.title}" /></td>
-                    <td><button onclick="redirect_find(${specialty.departmentId})">
+                    <td><button onclick="redirect_find_department(${specialty.departmentId})">
                             ${specialty.departmentId}</button></td>
                     <td><button onclick="redirect_edit(${specialty.id})">Edit</button></td>
                     <td><button onclick="redirect_delete(${specialty.id})">Delete</button></td>
@@ -31,7 +31,7 @@
                     <tr>
                         <td><c:out value="${spec.id}" /></td>
                         <td><c:out value="${spec.title}" /></td>
-                        <td><a href="../../department/find/<c:out value='${spec.departmentId}' />">${spec.departmentId}</a></td>
+                        <td><button onclick="redirect_find_department(${spec.departmentId})">${spec.departmentId}</button></td>
                         <td><button onclick="redirect_edit(${spec.id})">Edit</button></td>
                         <td><button onclick="redirect_delete(${spec.id})">Delete</button></td>
                     </tr>

@@ -25,8 +25,8 @@
                 <td><c:out value="${ord.date}" /></td>
                 <td><c:out value="${ord.amount}" /></td>
                 <td><c:out value="${ord.cost}" /></td>
-                <td onclick="redirect_find_client(${ord.id})"><c:out value='${ord.clientId}' />">${ord.clientId}</td>
-                <td onclick="redirect_find_item(${ord.id})"><c:out value='${ord.itemId}' />">${ord.itemId}</td>
+                <td onclick="redirect_find_client(${ord.clientId})">${ord.clientId}</td>
+                <td onclick="redirect_find_item(${ord.itemId})">${ord.itemId}</td>
                 <td><button onclick="redirect_edit(${ord.id})">Edit</button> </td>
                 <td><button onclick="redirect_delete(${ord.id})">Delete</button> </td>
             </tr>

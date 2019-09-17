@@ -42,25 +42,25 @@ public class ItemRestController {
     public ResponseEntity<Map<String, Object>> add(@RequestBody Item item,
                                                    BindingResult result) {
         Map<String, Object> response = new HashMap<>();
-        boolean itemEdited = itemService.editItem(item);
-        if (itemEdited) {
+        itemValidator.validate(item, result);
+        if (result.hasErrors()) {
+            ValidationHelper.validation(result);
+        } else {
+            itemService.add(item);
             response.put("message", "OK");
-        } else throw new ItemNotFoundRestException();
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/item/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
+    @PutMapping(value = "/item/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Item item,
-                                                    BindingResult result) {
+    public ResponseEntity<Map<String, Object>> edit(@RequestBody Item item) {
         Map<String, Object> response = new HashMap<>();
-        itemValidator.validate(item, result);
-        if (result.hasErrors()) {
-            LOGGER.error("Edit method of ItemRestController not unique");
-            ValidationHelper.validation(result);
-        } else {
-            itemService.edit(item);
+        boolean itemEdited = itemService.editItem(item);
+        if (itemEdited) {
             response.put("message", "OK");
+        } else {
+            throw new ItemNotFoundRestException();
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
