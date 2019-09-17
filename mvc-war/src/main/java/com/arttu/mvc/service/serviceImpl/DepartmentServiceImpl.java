@@ -35,6 +35,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public boolean editDepartment(Department department) {
+        return departmentDao.editDepartment(department);
+    }
+
+    @Override
     public List<Department> findAll() {
         return departmentDao.findAll();
     }

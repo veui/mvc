@@ -25,4 +25,9 @@ public class OrderExceptionHandler {
         return new ResponseEntity<>(new ErrorMessage("Order is not unique"),
                 HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(OrderNotFoundRestException.class)
+    public ResponseEntity<ErrorMessage> handleOrderNotFoundRestExcpetion() {
+        return new ResponseEntity<>(new ErrorMessage("Order not found"), HttpStatus.NOT_FOUND);
+    }
 }

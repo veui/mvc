@@ -129,4 +129,25 @@ public class OrderDaoImpl implements OrderDao {
             LOGGER.error(e);
         }
     }
+
+    @Override
+    public boolean editOrder(Order order) {
+        boolean isOk;
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement(OrderQueries.SQL_UPDATE.getValue())) {
+                statement.setDate(1, order.getDate());
+                statement.setInt(2, order.getAmount());
+                statement.setFloat(3, order.getCost());
+                statement.setInt(4, order.getClientId());
+                statement.setInt(5, order.getItemId());
+                statement.setInt(6, order.getId());
+                statement.executeUpdate();
+                isOk = true;
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            isOk = false;
+        }
+        return isOk;
+    }
 }

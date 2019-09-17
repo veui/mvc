@@ -71,15 +71,4 @@ public class ItemController {
         modelAndView.addObject("itemList", item);
         return modelAndView;
     }
-
-    @GetMapping(value = "/item/delete/{id}")
-    public ModelAndView delete(@PathVariable int id) {
-        Item item = itemService.findById(id);
-        if (item.getId() == 0) {
-            throw new ItemNotFoundException("Item not found");
-        } else {
-            itemService.deleteById(id);
-        }
-        return new ModelAndView("redirect:/item");
-    }
 }

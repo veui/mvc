@@ -34,6 +34,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public boolean editOrder(Order order) {
+        return orderDao.editOrder(order);
+    }
+
+    @Override
     public List<Order> findAll() {
         return orderDao.findAll();
     }

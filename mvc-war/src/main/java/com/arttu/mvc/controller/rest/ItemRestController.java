@@ -1,5 +1,6 @@
 package com.arttu.mvc.controller.rest;
 
+import com.arttu.mvc.exception.item.ItemNotFoundRestException;
 import com.arttu.mvc.model.Item;
 import com.arttu.mvc.service.ItemService;
 import com.arttu.mvc.util.ValidationHelper;
@@ -12,12 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -43,14 +42,10 @@ public class ItemRestController {
     public ResponseEntity<Map<String, Object>> add(@RequestBody Item item,
                                                    BindingResult result) {
         Map<String, Object> response = new HashMap<>();
-        itemValidator.validate(item, result);
-        if (result.hasErrors()) {
-            LOGGER.error("Add method of ItemRestController not unique");
-            ValidationHelper.validation(result);
-        } else {
-            itemService.add(item);
+        boolean itemEdited = itemService.editItem(item);
+        if (itemEdited) {
             response.put("message", "OK");
-        }
+        } else throw new ItemNotFoundRestException();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -68,5 +63,31 @@ public class ItemRestController {
             response.put("message", "OK");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/item/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteById(@PathVariable int id) {
+        Map<String, Object> response = new HashMap<>();
+        Item item = itemService.findById(id);
+        if (item == null) throw new ItemNotFoundRestException();
+        else {
+            itemService.deleteById(id);
+            response.put("message", "OK");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/item/rest/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        Item item = itemService.findById(id);
+        if (item == null) throw new ItemNotFoundRestException();
+        return new ResponseEntity<>(item, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/item/rest/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findAll() {
+        List<Item> items = itemService.findAll();
+        if (items.isEmpty()) throw new ItemNotFoundRestException();
+        return new ResponseEntity<>(items, HttpStatus.OK);
     }
 }

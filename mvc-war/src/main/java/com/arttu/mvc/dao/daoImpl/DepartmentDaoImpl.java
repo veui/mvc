@@ -69,6 +69,24 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
+    public boolean editDepartment(Department department) {
+        boolean isOk;
+        LOGGER.info("Method editDepartment started to work");
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement(DepartmentQueries.SQL_UPDATE.getValue())) {
+                statement.setString(1, department.getTitle());
+                statement.setInt(2, department.getId());
+                statement.executeUpdate();
+                isOk = true;
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            isOk = false;
+        }
+        return isOk;
+    }
+
+    @Override
     public List<Specialty> findAttachedSpecialties(int id) {
         LOGGER.info("Method find attached specialties started to work");
         List<Specialty> result = new ArrayList<>();

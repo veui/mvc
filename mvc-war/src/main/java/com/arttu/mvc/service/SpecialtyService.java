@@ -9,6 +9,7 @@ public interface SpecialtyService {
     void add(Specialty specialty);
     void delete(Specialty specialty);
     void edit(Specialty specialty);
+    boolean editSpecialty(Specialty specialty);
     List<Specialty> findAll();
     List<Item> findAttachedItems(int id);
     Specialty findById(int id);

@@ -26,4 +26,9 @@ public class SpecialtyExceptionHandler {
         modelAndView.addObject("msg", ex.getMessage());
         return modelAndView;
     }
+
+    @ExceptionHandler(SpecialtyNotFoundRestException.class)
+    protected ResponseEntity<ErrorMessage> handleSpecialtyNotFoundRestException() {
+        return new ResponseEntity<>(new ErrorMessage("Specialty not found"), HttpStatus.BAD_REQUEST);
+    }
 }

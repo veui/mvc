@@ -69,6 +69,25 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
     }
 
     @Override
+    public boolean editSpecialty(Specialty specialty) {
+        boolean isOk;
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement
+                    (SpecialtyQueries.SQL_UPDATE.getValue())) {
+                statement.setString(1, specialty.getTitle());
+                statement.setInt(2, specialty.getDepartmentId());
+                statement.setInt(3, specialty.getId());
+                statement.executeUpdate();
+                isOk = true;
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            isOk = false;
+        }
+        return isOk;
+    }
+
+    @Override
     public List<Item> findAttachedItems(int id) {
         LOGGER.info("Find attached items started to work");
         List<Item> result = new ArrayList<>();

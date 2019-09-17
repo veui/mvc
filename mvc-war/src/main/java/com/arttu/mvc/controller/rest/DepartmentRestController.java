@@ -59,16 +59,14 @@ public class DepartmentRestController {
 
     @PutMapping(value = "department/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Department department,
-                                                    BindingResult result) {
+    public ResponseEntity<Map<String, Object>> edit(@RequestBody Department department) {
         LOGGER.info("Edit method of DepartmentRestController started to work");
         response = new HashMap<>();
-        departmentValidator.validate(department, result);
-        if (result.hasErrors()) {
-            ValidationHelper.validation(result);
-        } else {
-            departmentService.edit(department);
+        boolean departmentEdited = departmentService.editDepartment(department);
+        if (departmentEdited) {
             response.put("message", "OK");
+        } else {
+            throw new DepartmentNotFoundRestException();
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

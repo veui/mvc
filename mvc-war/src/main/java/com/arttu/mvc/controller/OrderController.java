@@ -9,8 +9,6 @@ import com.arttu.mvc.model.Order;
 import com.arttu.mvc.service.ClientService;
 import com.arttu.mvc.service.ItemService;
 import com.arttu.mvc.service.OrderService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +20,6 @@ import java.util.List;
 @Controller
 public class OrderController {
 
-    private static final Logger LOGGER = LogManager.getLogger(OrderController.class);
     private OrderService orderService;
     private ClientService clientService;
     private ItemService itemService;
@@ -94,16 +91,5 @@ public class OrderController {
         modelAndView.addObject("itemList", itemList);
         modelAndView.addObject("orderList", order);
         return modelAndView;
-    }
-
-    @GetMapping(value = "/order/delete/{id}")
-    public ModelAndView delete(@PathVariable int id) {
-        Order order = orderService.findById(id);
-        if (order.getId() == 0) {
-            throw new OrderNotFoundException("Order not found");
-        } else {
-            orderService.deleteById(id);
-        }
-        return new ModelAndView("redirect:/order");
     }
 }

@@ -127,6 +127,27 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
+    public boolean editItem(Item item) {
+        boolean isOk;
+        LOGGER.info("Method editItem started to work " + item.toString());
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement
+                    (ItemQueries.SQL_UPDATE.getValue())) {
+                statement.setString(1, item.getItem());
+                statement.setFloat(2, item.getPrice());
+                statement.setInt(3, item.getSpecialtyId());
+                statement.setInt(4, item.getId());
+                statement.executeUpdate();
+                isOk = true;
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            isOk = false;
+        }
+        return isOk;
+    }
+
+    @Override
     public Item findByTitle(String title) {
         Item result = new Item();
         try(Connection connection = dataSource.getConnection()) {

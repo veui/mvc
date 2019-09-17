@@ -25,4 +25,9 @@ public class ItemExceptionHandler {
         return new ResponseEntity<>(new ErrorMessage("Item is not unique"),
                 HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ItemNotFoundRestException.class)
+    public ResponseEntity<ErrorMessage> handleItemNotFoundRestException() {
+        return new ResponseEntity<>(new ErrorMessage("Item not found"), HttpStatus.NOT_FOUND);
+    }
 }

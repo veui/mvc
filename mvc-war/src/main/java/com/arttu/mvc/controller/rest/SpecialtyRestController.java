@@ -1,5 +1,6 @@
 package com.arttu.mvc.controller.rest;
 
+import com.arttu.mvc.exception.specialty.SpecialtyNotFoundRestException;
 import com.arttu.mvc.model.Specialty;
 import com.arttu.mvc.service.SpecialtyService;
 import com.arttu.mvc.util.ValidationHelper;
@@ -12,12 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -53,18 +52,42 @@ public class SpecialtyRestController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/specialty/edit", consumes = {MediaType.APPLICATION_JSON_VALUE},
+    @PutMapping(value = "/specialty/edit", consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Specialty specialty, BindingResult result) {
+    public ResponseEntity<Map<String, Object>> edit(@RequestBody Specialty specialty) {
         Map<String, Object> response = new HashMap<>();
-        specialtyValidator.validate(specialty, result);
-        if (result.hasErrors()) {
-            LOGGER.error("Edit method of SpecialtyRestController");
-            ValidationHelper.validation(result);
-        } else {
-            specialtyService.edit(specialty);
+        boolean specialtyEdited = specialtyService.editSpecialty(specialty);
+        if (specialtyEdited) {
             response.put("message", "OK");
+        } else {
+            throw new SpecialtyNotFoundRestException();
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/specialty/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        Map<String, Object> resposnse = new HashMap<>();
+        Specialty specialty = specialtyService.findById(id);
+        if (specialty == null) throw new SpecialtyNotFoundRestException();
+        else {
+            specialtyService.deleteById(id);
+            resposnse.put("message", "OK");
+        }
+        return new ResponseEntity<>(resposnse, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/specialty/rest/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        Specialty specialty = specialtyService.findById(id);
+        if (specialty == null) throw new SpecialtyNotFoundRestException();
+        return new ResponseEntity<>(specialty, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/specialty/rest/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findAll() {
+        List<Specialty> specialties = specialtyService.findAll();
+        if (specialties.isEmpty()) throw new SpecialtyNotFoundRestException();
+        return new ResponseEntity<>(specialties, HttpStatus.OK);
     }
 }

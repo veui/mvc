@@ -8,6 +8,7 @@ public interface OrderService {
     void add(Order order);
     void delete(Order order);
     void edit(Order order);
+    boolean editOrder(Order order);
     List<Order> findAll();
     Order findById(int id);
 

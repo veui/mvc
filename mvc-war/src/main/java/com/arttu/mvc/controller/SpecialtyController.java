@@ -79,15 +79,4 @@ public class SpecialtyController {
         modelAndView.addObject("departmentList", departments);
         return modelAndView;
     }
-
-    @GetMapping(value = "/specialty/delete/{id}")
-    public ModelAndView delete(@PathVariable int id) {
-        Specialty specialty = specialtyService.findById(id);
-        if (specialty.getId() == 0) {
-            throw new SpecialtyNotFoundException("Specialty not found");
-        } else {
-            specialtyService.deleteById(id);
-        }
-        return new ModelAndView("redirect:/specialty");
-    }
 }

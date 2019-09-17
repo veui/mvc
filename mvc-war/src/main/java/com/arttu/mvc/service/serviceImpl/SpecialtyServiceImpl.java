@@ -35,6 +35,11 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
+    public boolean editSpecialty(Specialty specialty) {
+        return specialtyDao.editSpecialty(specialty);
+    }
+
+    @Override
     public List<Specialty> findAll() {
         return specialtyDao.findAll();
     }

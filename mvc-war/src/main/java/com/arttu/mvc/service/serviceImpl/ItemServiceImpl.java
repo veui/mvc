@@ -54,6 +54,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public boolean editItem(Item item) {
+        return itemDao.editItem(item);
+    }
+
+    @Override
     public List<Item> findAllHierarchicalItem() {
         return itemDao.hierarchicalItem();
     }

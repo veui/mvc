@@ -9,6 +9,7 @@ public interface ItemService {
     void delete(Item item);
     void edit(Item item);
     void deleteById(int id);
+    boolean editItem(Item item);
 
     Item findById(int id);
     Item findByTitle(String title);

@@ -1,5 +1,6 @@
 package com.arttu.mvc.controller.rest;
 
+import com.arttu.mvc.exception.order.OrderNotFoundRestException;
 import com.arttu.mvc.model.Order;
 import com.arttu.mvc.service.OrderService;
 import com.arttu.mvc.util.ValidationHelper;
@@ -12,12 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,15 +39,14 @@ public class OrderResrController {
 
     @PostMapping(value = "/order/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> edit(@RequestBody Order order, BindingResult result) {
+    public ResponseEntity<Map<String, Object>> edit(@RequestBody Order order) {
         Map<String, Object> response = new HashMap<>();
-        orderValidator.validate(order, result);
-        if (result.hasErrors()) {
-            LOGGER.error("Edit method of OrderRestController - not unique");
-            ValidationHelper.validation(result);
-        } else {
+        boolean orderEdited = orderService.editOrder(order);
+        if (orderEdited) {
             orderService.edit(order);
             response.put("message", "OK");
+        } else {
+            throw new OrderNotFoundRestException();
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -66,5 +64,30 @@ public class OrderResrController {
             response.put("message", "OK");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/order/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteById(@PathVariable int id) {
+        Map<String, Object> response = new HashMap<>();
+        Order order = orderService.findById(id);
+        if (order == null) throw new OrderNotFoundRestException();
+        else {
+            orderService.deleteById(id);
+            response.put("message", "OK");
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "order/rest/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        Order order = orderService.findById(id);
+        if (order == null) throw new OrderNotFoundRestException();
+        return new ResponseEntity<>(order, HttpStatus.OK);
+    }
+    @GetMapping(value = "order/rest/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findAll() {
+        List<Order> orders = orderService.findAll();
+        if (orders.isEmpty()) throw new OrderNotFoundRestException();
+        return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 }
