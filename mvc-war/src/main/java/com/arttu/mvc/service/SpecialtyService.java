@@ -12,6 +12,7 @@ public interface SpecialtyService {
     boolean editSpecialty(Specialty specialty);
     List<Specialty> findAll();
     List<Item> findAttachedItems(int id);
+    List<Specialty> hierarchicalSpecialty();
     Specialty findById(int id);
 
     void deleteById(int id);

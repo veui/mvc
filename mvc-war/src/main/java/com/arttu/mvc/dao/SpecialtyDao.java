@@ -9,4 +9,5 @@ public interface SpecialtyDao extends BaseDao<Specialty> {
     void deleteById(int id);
     boolean editSpecialty(Specialty specialty);
     List<Item> findAttachedItems(int id);
+    List<Specialty> hierarchicalQuery();
 }

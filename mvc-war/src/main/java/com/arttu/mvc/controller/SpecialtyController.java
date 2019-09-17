@@ -57,8 +57,10 @@ public class SpecialtyController {
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("specialty/addSpecialty");
         List<Department> departments = departmentService.findAll();
+        List<Specialty> specialties = specialtyService.findAll();
         if (departments.isEmpty()) throw new DepartmentNotFoundException("Department not found");
         modelAndView.addObject("departmentList", departments);
+        modelAndView.addObject("specialtyList", specialties);
         return modelAndView;
     }
 
@@ -66,6 +68,7 @@ public class SpecialtyController {
     public ModelAndView edit(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("specialty/editSpecialty");
         Specialty specialty = specialtyService.findById(id);
+        List<Specialty> specialties = specialtyService.findAll();
         List<Department> departments = departmentService.findAll();
         if (specialty.getId() == 0) {
             LOGGER.error("Edit method of SpecialtyController class");
@@ -76,6 +79,7 @@ public class SpecialtyController {
             throw new DepartmentNotFoundException("Department not found");
         }
         modelAndView.addObject("specialtyList", specialty);
+        modelAndView.addObject("specialties", specialties);
         modelAndView.addObject("departmentList", departments);
         return modelAndView;
     }

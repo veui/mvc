@@ -6,8 +6,13 @@ function edit() {
     var edit = {
         id : $('#id').val(),
         title : $('#title').val(),
-        departmentId : $('#optionDp').val()
+        departmentId : $('#optionDp').val(),
+        parentId: $('#selectParent :selected').val()
     };
+    if (edit.id === edit.parentId) {
+        isValid = false;
+        $("#parentIdNotEqualToId").html("Id and parent id should not be equal");
+    }
     if (validateString(edit.title) === false) {
         isValid = false;
     }

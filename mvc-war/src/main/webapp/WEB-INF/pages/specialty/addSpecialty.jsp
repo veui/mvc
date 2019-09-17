@@ -39,7 +39,19 @@
         </td>
     </tr>
     <tr>
-        <td></td>
+        <td>Parent ID</td>
+        <td>
+            <label for="selectParent">
+                <select id="selectParent">
+                    <option id="optionParent" value=0>0</option>
+                    <c:forEach items="${specialtyList}" var="spe">
+                        <option id="optionParent" value="${spe.id}">${spe.id}</option>
+                    </c:forEach>
+                </select>
+            </label>
+        </td>
+    </tr>
+    <tr>
         <td><button type="button" onclick="add()">Submit</button></td>
     </tr>
 </table>

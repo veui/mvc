@@ -62,4 +62,7 @@ create table Order_(
 		on delete cascade
 );
 
+alter table Specialty
+    add parent_id number;
+
 commit;

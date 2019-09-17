@@ -14,6 +14,7 @@
             <th>Specialty ID</th>
             <th>Title</th>
             <th>Department ID</th>
+            <th>Parent ID</th>
         </tr>
         <c:choose>
             <c:when test="${specialty != null}">
@@ -22,6 +23,7 @@
                     <td><c:out value="${specialty.title}" /></td>
                     <td><button onclick="redirect_find_department(${specialty.departmentId})">
                             ${specialty.departmentId}</button></td>
+                    <td><c:out value="${specialty.parentId}" /></td>
                     <td><button onclick="redirect_edit(${specialty.id})">Edit</button></td>
                     <td><button onclick="redirect_delete(${specialty.id})">Delete</button></td>
                 </tr>
@@ -32,6 +34,7 @@
                         <td><c:out value="${spec.id}" /></td>
                         <td><c:out value="${spec.title}" /></td>
                         <td><button onclick="redirect_find_department(${spec.departmentId})">${spec.departmentId}</button></td>
+                        <td><c:out value="${spec.parentId}" /></td>
                         <td><button onclick="redirect_edit(${spec.id})">Edit</button></td>
                         <td><button onclick="redirect_delete(${spec.id})">Delete</button></td>
                     </tr>
@@ -59,6 +62,6 @@
         </table>
     </c:if>
 <br />
-    <button onclick="redirect_add()"></button>
+    <button onclick="redirect_add()">Add specialty</button>
 </body>
 </html>

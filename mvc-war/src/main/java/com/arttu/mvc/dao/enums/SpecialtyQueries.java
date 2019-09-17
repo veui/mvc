@@ -4,13 +4,14 @@ public enum SpecialtyQueries {
     SQL_FIND_ALL("SELECT * FROM SPECIALTY"),
     SQL_FIND_BY_ID("select * from SPECIALTY where specialty_id = ?"),
     SQL_INSERT("insert into SPECIALTY" +
-            "(title, department_id) " +
-            "values (?, ?)"),
+            "(title, department_id, parent_id) " +
+            "values (?, ?, ?)"),
     SQL_FIND_ITEMS("select * from item " +
             "inner join specialty on specialty.specialty_id = item.specialty_id " +
             "where specialty.specialty_id = ?"),
-    SQL_UPDATE("update SPECIALTY set title = ?, department_id = ? " +
+    SQL_UPDATE("update SPECIALTY set title = ?, department_id = ?, parent_id = ? " +
             "where specialty_id = ?"),
+    SQL_HIERARCHICAL_QUERY(""),
     SQL_DELETE("delete from SPECIALTY where specialty_id = ?");
 
     private String value;

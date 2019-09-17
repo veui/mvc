@@ -30,11 +30,13 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
 
     @Override
     public void add(Specialty specialty) {
+        LOGGER.info("Add method started to work");
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement statement = connection.prepareStatement
                     (SpecialtyQueries.SQL_INSERT.getValue())) {
                 statement.setString(1, specialty.getTitle());
                 statement.setInt(2, specialty.getDepartmentId());
+                statement.setInt(3, specialty.getParentId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -70,13 +72,15 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
 
     @Override
     public boolean editSpecialty(Specialty specialty) {
+        LOGGER.info("editSpecialty method started to work");
         boolean isOk;
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement statement = connection.prepareStatement
                     (SpecialtyQueries.SQL_UPDATE.getValue())) {
                 statement.setString(1, specialty.getTitle());
                 statement.setInt(2, specialty.getDepartmentId());
-                statement.setInt(3, specialty.getId());
+                statement.setInt(3, specialty.getParentId());
+                statement.setInt(4, specialty.getId());
                 statement.executeUpdate();
                 isOk = true;
             }
@@ -112,6 +116,28 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
     }
 
     @Override
+    public List<Specialty> hierarchicalQuery() {
+        List<Specialty> result = new ArrayList<>();
+        try(Connection connection = dataSource.getConnection()) {
+            try(Statement statement = connection.createStatement()) {
+                try(ResultSet set = statement.executeQuery(SpecialtyQueries.SQL_HIERARCHICAL_QUERY.getValue())) {
+                    while (set.next()) {
+                        Specialty specialty = new Specialty();
+                        specialty.setId(set.getInt("specialty_id"));
+                        specialty.setTitle(set.getString("title"));
+                        specialty.setDepartmentId(set.getInt("department_id"));
+                        specialty.setParentId(set.getInt("parent_id"));
+                        result.add(specialty);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return result;
+    }
+
+    @Override
     public void edit(Specialty specialty) {
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement statement = connection.prepareStatement
@@ -119,6 +145,7 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
                 statement.setString(1, specialty.getTitle());
                 statement.setInt(2, specialty.getDepartmentId());
                 statement.setInt(3, specialty.getId());
+                statement.setInt(4, specialty.getParentId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -137,6 +164,7 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
                         specialty.setId(resultSet.getInt("specialty_id"));
                         specialty.setTitle(resultSet.getString("title"));
                         specialty.setDepartmentId(resultSet.getInt("department_id"));
+                        specialty.setParentId(resultSet.getInt("parent_id"));
                         result.add(specialty);
                     }
                 }
@@ -159,6 +187,7 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
                         specialty.setId(resultSet.getInt(1));
                         specialty.setTitle(resultSet.getString(2));
                         specialty.setDepartmentId(resultSet.getInt(3));
+                        specialty.setParentId(resultSet.getInt(4));
                     }
                 }
             }

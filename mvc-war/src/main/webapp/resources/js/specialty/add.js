@@ -6,8 +6,10 @@ function add() {
     var isValid = true;
     var add = {
         title: $('#title').val(),
-        departmentId: $("#selectId :selected").val()
+        departmentId: $("#selectId :selected").val(),
+        parentId: $('#selectParent :selected').val()
     };
+    console.log(add);
     if (validateString(add.title) === false) {
         isValid = false;
     }

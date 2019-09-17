@@ -7,14 +7,16 @@ public class Specialty {
     private int id;
     private String title;
     private int departmentId;
+    private int parentId;
 
     public Specialty() {
     }
 
-    public Specialty(int id, String title, int departmentId) {
+    public Specialty(int id, String title, int departmentId, int parentId) {
         this.id = id;
         this.title = title;
         this.departmentId = departmentId;
+        this.parentId = parentId;
     }
 
     public int getId() {
@@ -41,19 +43,24 @@ public class Specialty {
         this.departmentId = departmentId;
     }
 
+    public int getParentId() { return parentId; }
+
+    public void setParentId(int parentId) { this.parentId = parentId; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Specialty specialty = (Specialty) o;
         return id == specialty.id &&
-                title.equals(specialty.title) &&
-                Objects.equals(departmentId, specialty.departmentId);
+                departmentId == specialty.departmentId &&
+                parentId == specialty.parentId &&
+                title.equals(specialty.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, departmentId);
+        return Objects.hash(id, title, departmentId, parentId);
     }
 
     @Override
@@ -62,6 +69,7 @@ public class Specialty {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", departmentId=" + departmentId +
+                ", parentId=" + parentId +
                 '}';
     }
 }

@@ -50,6 +50,11 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
+    public List<Specialty> hierarchicalSpecialty() {
+        return specialtyDao.hierarchicalQuery();
+    }
+
+    @Override
     public Specialty findById(int id) {
         return specialtyDao.findById(id);
     }

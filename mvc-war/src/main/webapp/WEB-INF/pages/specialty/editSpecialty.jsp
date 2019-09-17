@@ -41,6 +41,20 @@
             </td>
         </tr>
         <tr>
+            <td>Parent ID</td>
+            <td>
+                <label for="selectParent">
+                    <select id="selectParent">
+                        <option id="optionParent" value=0>0</option>
+                        <c:forEach items="${specialties}" var="spe">
+                            <option id="optionParent" value="${spe.id}">${spe.id}</option>
+                        </c:forEach>
+                    </select>
+                </label>
+                <div id="parentIdNotEqualToId"></div>
+            </td>
+        </tr>
+        <tr>
             <td></td>
             <td><button type="button" onclick="edit()">Submit</button></td>
         </tr>
