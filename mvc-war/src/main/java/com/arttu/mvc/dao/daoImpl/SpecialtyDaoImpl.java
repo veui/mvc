@@ -3,6 +3,7 @@ package com.arttu.mvc.dao.daoImpl;
 import com.arttu.mvc.dao.SpecialtyDao;
 import com.arttu.mvc.dao.enums.SpecialtyQueries;
 import com.arttu.mvc.model.Item;
+import com.arttu.mvc.model.ItemSpecialtyWrapper;
 import com.arttu.mvc.model.Specialty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -116,18 +117,50 @@ public class SpecialtyDaoImpl implements SpecialtyDao {
     }
 
     @Override
-    public List<Specialty> hierarchicalQuery() {
-        List<Specialty> result = new ArrayList<>();
+    public List<ItemSpecialtyWrapper> hierarchicalQuery() {
+        List<ItemSpecialtyWrapper> result = new ArrayList<>();
         try(Connection connection = dataSource.getConnection()) {
-            try(Statement statement = connection.createStatement()) {
-                try(ResultSet set = statement.executeQuery(SpecialtyQueries.SQL_HIERARCHICAL_QUERY.getValue())) {
+            try(PreparedStatement statement = connection.prepareStatement(SpecialtyQueries.SQL_HIERARCHICAL_QUERY.getValue())) {
+                try(ResultSet set = statement.executeQuery()) {
                     while (set.next()) {
-                        Specialty specialty = new Specialty();
-                        specialty.setId(set.getInt("specialty_id"));
-                        specialty.setTitle(set.getString("title"));
-                        specialty.setDepartmentId(set.getInt("department_id"));
-                        specialty.setParentId(set.getInt("parent_id"));
-                        result.add(specialty);
+                        ItemSpecialtyWrapper wrapper = new ItemSpecialtyWrapper();
+                        wrapper.setId(set.getInt("item_id"));
+                        wrapper.setItem(set.getString("item"));
+                        wrapper.setPrice(set.getFloat("price"));
+                        wrapper.setSpecialtyId(set.getInt("specialty_id"));
+                        wrapper.setSpecId(set.getInt("specialty_id"));
+                        wrapper.setTitle(set.getString("title"));
+                        wrapper.setDepartmentId(set.getInt("department_id"));
+                        wrapper.setParentId(set.getInt("parent_id"));
+                        result.add(wrapper);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return result;
+    }
+
+    @Override
+    public List<ItemSpecialtyWrapper> hierarchicalQueryId(int id) {
+        List<ItemSpecialtyWrapper> result = new ArrayList<>();
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement statement = connection.prepareStatement(
+                    SpecialtyQueries.SQL_HIERARCHICAL_SELECTED_QUERY.getValue())) {
+                statement.setInt(1, id);
+                try(ResultSet set = statement.executeQuery()) {
+                    while (set.next()) {
+                        ItemSpecialtyWrapper wrapper = new ItemSpecialtyWrapper();
+                        wrapper.setId(set.getInt("item_id"));
+                        wrapper.setItem(set.getString("item"));
+                        wrapper.setPrice(set.getFloat("price"));
+                        wrapper.setSpecialtyId(set.getInt("specialty_id"));
+                        wrapper.setSpecId(set.getInt("specialty_id"));
+                        wrapper.setTitle(set.getString("title"));
+                        wrapper.setDepartmentId(set.getInt("department_id"));
+                        wrapper.setParentId(set.getInt("parent_id"));
+                        result.add(wrapper);
                     }
                 }
             }

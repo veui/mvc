@@ -11,8 +11,19 @@ public enum SpecialtyQueries {
             "where specialty.specialty_id = ?"),
     SQL_UPDATE("update SPECIALTY set title = ?, department_id = ?, parent_id = ? " +
             "where specialty_id = ?"),
-    SQL_HIERARCHICAL_QUERY(""),
-    SQL_DELETE("delete from SPECIALTY where specialty_id = ?");
+    SQL_DELETE("delete from SPECIALTY where specialty_id = ?"),
+    SQL_HIERARCHICAL_QUERY("select Specialty.specialty_id, Specialty.title, Specialty.department_id, Specialty.parent_id, " +
+            " i.item_id, i.item, i.price, i.specialty_id " +
+            "from Specialty " +
+            "left join item i on i.specialty_id = specialty.specialty_id " +
+            "start with parent_id is null " +
+            "connect by prior specialty.specialty_id =  specialty.parent_id"),
+    SQL_HIERARCHICAL_SELECTED_QUERY("select Specialty.specialty_id, Specialty.title, Specialty.department_id, Specialty.parent_id, " +
+            " i.item_id, i.item, i.price, i.specialty_id " +
+            "from Specialty " +
+            "left join item i on i.specialty_id = specialty.specialty_id " +
+            "start with specialty.specialty_id = ? " +
+            "connect by prior specialty.specialty_id =  specialty.parent_id");
 
     private String value;
 

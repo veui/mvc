@@ -2,6 +2,7 @@ package com.arttu.mvc.service.serviceImpl;
 
 import com.arttu.mvc.dao.SpecialtyDao;
 import com.arttu.mvc.model.Item;
+import com.arttu.mvc.model.ItemSpecialtyWrapper;
 import com.arttu.mvc.model.Specialty;
 import com.arttu.mvc.service.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,13 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public List<Specialty> hierarchicalSpecialty() {
+    public List<ItemSpecialtyWrapper> hierarchicalSpecialty() {
         return specialtyDao.hierarchicalQuery();
+    }
+
+    @Override
+    public List<ItemSpecialtyWrapper> hierarchicalSpecialtyId(int id) {
+        return specialtyDao.hierarchicalQueryId(id);
     }
 
     @Override

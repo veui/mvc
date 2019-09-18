@@ -1,6 +1,7 @@
 package com.arttu.mvc.service;
 
 import com.arttu.mvc.model.Item;
+import com.arttu.mvc.model.ItemSpecialtyWrapper;
 import com.arttu.mvc.model.Specialty;
 
 import java.util.List;
@@ -12,7 +13,8 @@ public interface SpecialtyService {
     boolean editSpecialty(Specialty specialty);
     List<Specialty> findAll();
     List<Item> findAttachedItems(int id);
-    List<Specialty> hierarchicalSpecialty();
+    List<ItemSpecialtyWrapper> hierarchicalSpecialty();
+    List<ItemSpecialtyWrapper> hierarchicalSpecialtyId(int id);
     Specialty findById(int id);
 
     void deleteById(int id);

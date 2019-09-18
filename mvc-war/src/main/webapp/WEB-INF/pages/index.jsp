@@ -7,24 +7,34 @@
 <html>
 <head>
     <title>Main page of the client</title>
+    <script src="<spring:url value="/resources/js/redirect.js" />"></script>
+    <script src="<spring:url value="/resources/js/index.js" />"></script>
     <link href="<spring:url value="/resources/css/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<c:if test="${hierarchicalItem != null}">
+<c:if test="${hierarchical != null}">
     <table>
         <tr>
+            <th>Specialty ID</th>
+            <th>Title</th>
+            <th>Department ID</th>
+            <th>Parent ID</th>
             <th>Item ID</th>
             <th>Item</th>
             <th>Price</th>
             <th>Specialty ID</th>
         </tr>
-        <c:forEach items="${hierarchicalItem}" var="hier">
+        <c:forEach items="${hierarchical}" var="hier">
             <tr>
-                <td><a href="/item/find/<c:out value='${hier.id}' />">${hier.id}</a></td>
+                <td onclick="redirect(${hier.specId})">${hier.specId}</td>
+                <td>${hier.title}</td>
+                <td>${hier.departmentId}</td>
+                <td onclick="redirect(${hier.parentId})">${hier.parentId}</td>
+                <td onclick="redirect_item(${hier.id})">${hier.id}</td>
                 <td><c:out value="${hier.item}" /></td>
                 <td><c:out value="${hier.price}" /></td>
-                <td><a href="/specialty/find/<c:out value='${hier.specialtyId}' />">${hier.specialtyId}</a></td>
-                <td><a href="order/add/${hier.id}">Order</a></td>
+                <td onclick="redirect_specialty(${hier.specialtyId})">${hier.specialtyId}</td>
+                <td><button onclick="redirect_order(${hier.id})">Order</button></td>
             </tr>
         </c:forEach>
     </table>
