@@ -8,7 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Add department</title>
-    <script src="<spring:url value="/resources/js/department/add.js" />"></script>
+    <script src="<spring:url value="/resources/js/department/department.js" />"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="<spring:url value="/resources/css/department/add.css" />" rel="stylesheet" type="text/css">
 </head>
@@ -24,6 +24,7 @@
                 <input name="title" id="title" type="text" />
             </label>
             <div id="department-non-unique-message"></div>
+            <div id="department-not-valid"></div>
         </td>
     </tr>
     <tr>

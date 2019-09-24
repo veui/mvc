@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the department</title>
-    <script src="<spring:url value="/resources/js/department/redirect.js" />"></script>
+    <script src="<spring:url value="/resources/js/department/department.js" />"></script>
     <link href="<spring:url value="/resources/css/department/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
