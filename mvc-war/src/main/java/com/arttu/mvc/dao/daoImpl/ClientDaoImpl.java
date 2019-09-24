@@ -39,7 +39,7 @@ public class ClientDaoImpl implements ClientDao {
                 statement.setString(3, client.getLastName());
                 statement.setString(4, client.getFirstName());
                 statement.setString(5, client.getEmail());
-                statement.setInt(6, client.getPhone());
+                statement.setLong(6, client.getPhone());
 
                 statement.executeUpdate();
             }
@@ -70,7 +70,7 @@ public class ClientDaoImpl implements ClientDao {
                 statement.setString(3, client.getFirstName());
                 statement.setString(4, client.getLastName());
                 statement.setString(5, client.getEmail());
-                statement.setInt(6, client.getPhone());
+                statement.setLong(6, client.getPhone());
                 statement.setInt(7, client.getId());
                 statement.executeUpdate();
             }
@@ -93,7 +93,7 @@ public class ClientDaoImpl implements ClientDao {
                         client.setFirstName(resultSet.getString(4));
                         client.setLastName(resultSet.getString(5));
                         client.setEmail(resultSet.getString(6));
-                        client.setPhone(resultSet.getInt(7));
+                        client.setPhone(resultSet.getLong(7));
                         result.add(client);
                     }
                 }
@@ -121,7 +121,7 @@ public class ClientDaoImpl implements ClientDao {
                         client.setFirstName(resultSet.getString(4));
                         client.setLastName(resultSet.getString(5));
                         client.setEmail(resultSet.getString(6));
-                        client.setPhone(resultSet.getInt(7));
+                        client.setPhone(resultSet.getLong(7));
                     }
                 }
             }
@@ -162,7 +162,7 @@ public class ClientDaoImpl implements ClientDao {
                         client.setFirstName(rs.getString(4));
                         client.setLastName(rs.getString(5));
                         client.setEmail(rs.getString(6));
-                        client.setPhone(rs.getInt(7));
+                        client.setPhone(rs.getLong(7));
                     }
                 }
             }
@@ -187,7 +187,7 @@ public class ClientDaoImpl implements ClientDao {
                         client.setFirstName(rs.getString(4));
                         client.setLastName(rs.getString(5));
                         client.setEmail(rs.getString(6));
-                        client.setPhone(rs.getInt(7));
+                        client.setPhone(rs.getLong(7));
                     }
                 }
             }
@@ -208,7 +208,7 @@ public class ClientDaoImpl implements ClientDao {
                 statement.setString(3, client.getFirstName());
                 statement.setString(4, client.getLastName());
                 statement.setString(5, client.getEmail());
-                statement.setInt(6, client.getPhone());
+                statement.setLong(6, client.getPhone());
                 statement.setInt(7, client.getId());
                 statement.executeUpdate();
                 isOk = true;

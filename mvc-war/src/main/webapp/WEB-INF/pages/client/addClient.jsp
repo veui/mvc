@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Add client</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<spring:url value="/resources/js/client/add.js" />"></script>
+    <script src="<spring:url value="/resources/js/client/client.js" />"></script>
     <link href="<spring:url value="/resources/css/client/add.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -21,6 +21,7 @@
                     <input name="username" id="username" type="text" />
                 </label>
                 <div id="username-non-unique-message"></div>
+                <div id="username-not-valid"></div>
             </td>
         </tr>
         <tr>
@@ -29,19 +30,26 @@
                 <label>
                     <input name="password" id="password" type="password" />
                 </label>
+                <div id="password-not-valid"></div>
             </td>
         </tr>
         <tr>
             <td>Last Name</td>
-            <td><label>
-                <input name="lastName" id="lastName" type="text" />
-            </label></td>
+            <td>
+                <label>
+                    <input name="lastName" id="lastName" type="text" />
+                </label>
+                <div id="lastname-not-valid"></div>
+            </td>
         </tr>
         <tr>
             <td>First Name</td>
-            <td><label>
-                <input name="firstName" id="firstName" type="text" />
-            </label></td>
+            <td>
+                <label>
+                    <input name="firstName" id="firstName" type="text" />
+                </label>
+                <div id="firstname-not-valid"></div>
+            </td>
         </tr>
         <tr>
             <td>Email</td>
@@ -50,15 +58,17 @@
                     <input name="email" id="email" type="email" />
                 </label>
                 <div id="email-non-unique-message"></div>
+                <div id="email-not-valid"></div>
             </td>
         </tr>
         <tr>
             <td>Phone</td>
             <td>
                 <label>
-                    <input name="phone" id="phone" type="number" />
+                    <input name="phone" id="phone" type="text" />
                 </label>
                 <div id="phone-non-unique-message"></div>
+                <div id="phone-not-valid"></div>
             </td>
         </tr>
         <tr>

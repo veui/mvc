@@ -10,12 +10,12 @@ public class Client {
     private String firstName;
     private String lastName;
     private String email;
-    private int phone;
+    private long phone;
 
     public Client() {
     }
 
-    public Client(int id, String username, String password, String firstName, String lastName, String email, int phone) {
+    public Client(int id, String username, String password, String firstName, String lastName, String email, long phone) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -73,11 +73,11 @@ public class Client {
         this.email = email;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

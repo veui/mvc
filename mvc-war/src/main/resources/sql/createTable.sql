@@ -65,4 +65,7 @@ create table Order_(
 alter table Specialty
     add parent_id number;
 
+alter table Client
+    MODIFY phone number(20);
+
 commit;

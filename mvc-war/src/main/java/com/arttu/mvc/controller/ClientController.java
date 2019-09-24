@@ -59,8 +59,7 @@ public class ClientController {
         ModelAndView modelAndView = new ModelAndView("client/editClient");
         Client client = clientService.findById(id);
         if (client == null) throw new ClientNotFoundException("Client not found. Please try another one");
-        modelAndView.addObject("clientList", clientService.findById(id));
-        modelAndView.setStatus(HttpStatus.OK);
+        modelAndView.addObject("clientList", client);
         return modelAndView;
     }
 }
