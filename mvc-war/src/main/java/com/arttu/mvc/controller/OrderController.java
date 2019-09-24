@@ -35,7 +35,11 @@ public class OrderController {
     public ModelAndView department() {
         ModelAndView modelAndView = new ModelAndView("order/order");
         List<Order> orderList = orderService.findAll();
+        List<Client> clients = clientService.findAll();
+        List<Item> items = itemService.findAll();
         modelAndView.addObject("orderList", orderList);
+        modelAndView.addObject("clientList", clients);
+        modelAndView.addObject("itemList", items);
         return modelAndView;
     }
 

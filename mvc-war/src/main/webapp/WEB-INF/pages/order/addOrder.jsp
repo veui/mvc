@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Add order</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<spring:url value="/resources/js/order/add.js" />"></script>
+    <script src="<spring:url value="/resources/js/order.js" />"></script>
     <link rel="stylesheet" href="<spring:url value="/resources/css/order/add.css" />" type="text/css">
 </head>
 <body>
@@ -24,6 +24,7 @@
             <label>
                 <input name="date" id="date" type="date" />
             </label>
+            <div id="date-not-valid"></div>
         </td>
     </tr>
     <tr>
@@ -32,13 +33,17 @@
             <label>
                 <input name="amount" id="amount" type="text" />
             </label>
+            <div id="amount-not-valid"></div>
         </td>
     </tr>
     <tr>
         <td>Cost</td>
-        <td><label>
-            <input name="cost" id="cost" type="text" />
-        </label></td>
+        <td>
+            <label>
+                <input name="cost" id="cost" type="text" />
+            </label>
+            <div id="cost-not-valid"></div>
+        </td>
     </tr>
     <tr>
         <td>Client</td>
@@ -51,6 +56,7 @@
                 </datalist>
                 <input name="Typelist" list="datalist" id="selectClient">
             </label>
+            <div id="client-not-valid"></div>
         </td>
     </tr>
     <tr>

@@ -8,7 +8,7 @@
     <head>
         <title>Edit Order</title>
         <link href="<spring:url value="/resources/css/order/edit.css" />" rel="stylesheet" type="text/css" />
-        <script src="<spring:url value="/resources/js/order/edit.js" />" rel="script" type="text/javascript"></script>
+        <script src="<spring:url value="/resources/js/order.js" />" rel="script" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
 <body>
@@ -25,6 +25,7 @@
                 <label>
                     <input name="date" id="date" type="date" />
                 </label>
+                <div id="date-not-valid"></div>
             </td>
         </tr>
         <tr>
@@ -33,13 +34,17 @@
                 <label>
                     <input name="amount" id="amount" type="text" />
                 </label>
+                <div id="amount-not-valid"></div>
             </td>
         </tr>
         <tr>
             <td>Cost</td>
-            <td><label>
-                <input name="cost" id="cost" type="text" />
-            </label></td>
+            <td>
+                <label>
+                    <input name="cost" id="cost" type="text" />
+                </label>
+                <div id="cost-not-valid"></div>
+            </td>
         </tr>
         <tr>
             <td>Client</td>
@@ -51,6 +56,7 @@
                         </c:forEach>
                     </select>
                 </label>
+                <div id="client-not-valid"></div>
             </td>
         </tr>
         <tr>

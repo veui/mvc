@@ -7,7 +7,6 @@
 <html>
 <head>
     <title>Main page of the client</title>
-    <script src="<spring:url value="/resources/js/redirect.js" />"></script>
     <script src="<spring:url value="/resources/js/index.js" />"></script>
     <link href="<spring:url value="/resources/css/index.css" />" rel="stylesheet" type="text/css" />
 </head>

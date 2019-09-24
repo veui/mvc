@@ -132,6 +132,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean editOrder(Order order) {
+        LOGGER.info("editOrder started to work");
         boolean isOk;
         try(Connection connection = dataSource.getConnection()) {
             try(PreparedStatement statement = connection.prepareStatement(OrderQueries.SQL_UPDATE.getValue())) {
@@ -141,8 +142,8 @@ public class OrderDaoImpl implements OrderDao {
                 statement.setInt(4, order.getClientId());
                 statement.setInt(5, order.getItemId());
                 statement.setInt(6, order.getId());
-                statement.executeUpdate();
                 isOk = true;
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             LOGGER.error(e);

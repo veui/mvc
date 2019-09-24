@@ -7,7 +7,7 @@ public enum OrderQueries {
             "(order_date, amount, cost, client_id, item_id) " +
             "values (?, ?, ?, ?, ?)"),
     SQL_UPDATE("update Order_ set order_date = ?, amount = ?, cost = ?, client_id = ?, item_id = ? " +
-            "where item_id = ?"),
+            "where order_id = ?"),
     SQL_DELETE("delete from order_ where order_id = ?");
 
     private String value;

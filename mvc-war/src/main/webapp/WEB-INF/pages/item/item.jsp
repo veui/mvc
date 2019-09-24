@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the item</title>
-    <script src="<spring:url value="/resources/js/item/item.js" />"></script>
+    <script src="<spring:url value="/resources/js/item.js" />"></script>
     <link rel="stylesheet" type="text/css" href="<spring:url value="/resources/css/item/index.css" />" />
 </head>
 <body>

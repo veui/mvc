@@ -56,10 +56,5 @@
     <mvc:resources mapping="/resources/css/specialty/**" location="/resources/css/specialty/" />
 
     <mvc:resources mapping="/resources/js/**" location="/resources/js/" />
-    <mvc:resources mapping="/resources/js/client/**" location="/resources/js/client/" />
-    <mvc:resources mapping="/resources/js/department/**" location="/resources/js/department/" />
-    <mvc:resources mapping="/resources/js/item/**" location="/resources/js/item/" />
-    <mvc:resources mapping="/resources/js/order/**" location="/resources/js/order/" />
-    <mvc:resources mapping="/resources/js/specialty/**" location="/resources/js/specialty/" />
 
 </beans>

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the order</title>
-    <script src="<spring:url value="/resources/js/order/redirect.js" />"></script>
+    <script src="<spring:url value="/resources/js/order.js" />"></script>
     <link href="<spring:url value="/resources/css/order/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -16,8 +16,8 @@
             <th>Date</th>
             <th>Amount</th>
             <th>Cost</th>
-            <th>Client ID</th>
-            <th>Item ID</th>
+            <th>Client</th>
+            <th>Item</th>
         </tr>
         <c:forEach items="${orderList}" var="ord">
             <tr>
@@ -25,8 +25,20 @@
                 <td><c:out value="${ord.date}" /></td>
                 <td><c:out value="${ord.amount}" /></td>
                 <td><c:out value="${ord.cost}" /></td>
-                <td onclick="redirect_find_client(${ord.clientId})">${ord.clientId}</td>
-                <td onclick="redirect_find_item(${ord.itemId})">${ord.itemId}</td>
+                <td onclick="redirect_find_client(${ord.clientId})">
+                        <c:forEach items="${clientList}" var="cli">
+                            <c:if test="${ord.clientId == cli.id}">
+                                ${cli.username}
+                            </c:if>
+                        </c:forEach>
+                </td>
+                <td onclick="redirect_find_item(${ord.itemId})">
+                        <c:forEach items="${itemList}" var="it">
+                            <c:if test="${ord.itemId == it.id}">
+                                ${it.item}
+                            </c:if>
+                        </c:forEach>
+                </td>
                 <td><button onclick="redirect_edit(${ord.id})">Edit</button> </td>
                 <td><button onclick="redirect_delete(${ord.id})">Delete</button> </td>
             </tr>

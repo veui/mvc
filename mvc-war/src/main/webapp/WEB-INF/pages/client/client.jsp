@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the client</title>
-    <script src="<spring:url value="/resources/js/client/client.js" />"></script>
+    <script src="<spring:url value="/resources/js/client.js" />"></script>
     <link href="<spring:url value="/resources/css/client/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>

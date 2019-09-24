@@ -37,13 +37,12 @@ public class OrderResrController {
         dataBinder.setValidator(orderValidator);
     }
 
-    @PostMapping(value = "/order/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
+    @PutMapping(value = "/order/edit", produces = {MediaType.APPLICATION_JSON_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Map<String, Object>> edit(@RequestBody Order order) {
         Map<String, Object> response = new HashMap<>();
         boolean orderEdited = orderService.editOrder(order);
         if (orderEdited) {
-            orderService.edit(order);
             response.put("message", "OK");
         } else {
             throw new OrderNotFoundRestException();
