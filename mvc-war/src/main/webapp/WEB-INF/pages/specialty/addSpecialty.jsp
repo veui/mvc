@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Add specailty</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<spring:url value="/resources/js/specialty/add.js" />"></script>
+    <script src="<spring:url value="/resources/js/specialty/specialty.js" />"></script>
     <link href="<spring:url value="/resources/css/specialty/add.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -24,6 +24,7 @@
                 <input name="title" id="title" type="text" />
             </label>
             <div id="title-non-unique-message"></div>
+            <div id="title-not-valid"></div>
         </td>
     </tr>
     <tr>
@@ -39,13 +40,13 @@
         </td>
     </tr>
     <tr>
-        <td>Parent ID</td>
+        <td>Parent</td>
         <td>
             <label for="selectParent">
                 <select id="selectParent">
                     <option id="optionParent" value=0>0</option>
                     <c:forEach items="${specialtyList}" var="spe">
-                        <option id="optionParent" value="${spe.id}">${spe.id}</option>
+                        <option id="optionParent" value="${spe.id}">${spe.title}</option>
                     </c:forEach>
                 </select>
             </label>

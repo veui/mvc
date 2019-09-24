@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the specialty</title>
-    <script src="<spring:url value="/resources/js/specialty/redirect.js" />"></script>
+    <script src="<spring:url value="/resources/js/specialty/specialty.js" />"></script>
     <link href="<spring:url value="/resources/css/specialty/index.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -13,8 +13,8 @@
         <tr>
             <th>Specialty ID</th>
             <th>Title</th>
-            <th>Department ID</th>
-            <th>Parent ID</th>
+            <th>Department</th>
+            <th>Parent</th>
         </tr>
         <c:choose>
             <c:when test="${specialty != null}">
@@ -33,8 +33,22 @@
                     <tr>
                         <td><c:out value="${spec.id}" /></td>
                         <td><c:out value="${spec.title}" /></td>
-                        <td><button onclick="redirect_find_department(${spec.departmentId})">${spec.departmentId}</button></td>
-                        <td><c:out value="${spec.parentId}" /></td>
+                        <td>
+                            <button onclick="redirect_find_department(${spec.departmentId})">
+                                <c:forEach items="${departmentList}" var="dep">
+                                    <c:if test="${spec.departmentId == dep.id}">
+                                        ${dep.title}
+                                    </c:if>
+                                </c:forEach>
+                            </button>
+                        </td>
+                        <td>
+                            <c:forEach items="${specialtyList}" var="sl">
+                                <c:if test="${spec.parentId == sl.id}">
+                                    ${sl.title}
+                                </c:if>
+                            </c:forEach>
+                        </td>
                         <td><button onclick="redirect_edit(${spec.id})">Edit</button></td>
                         <td><button onclick="redirect_delete(${spec.id})">Delete</button></td>
                     </tr>

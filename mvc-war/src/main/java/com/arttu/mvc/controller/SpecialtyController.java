@@ -34,7 +34,9 @@ public class SpecialtyController {
     public ModelAndView department() {
         ModelAndView modelAndView = new ModelAndView("specialty/specialty");
         List<Specialty> specialties = specialtyService.findAll();
+        List<Department> departments = departmentService.findAll();
         modelAndView.addObject("specialtyList", specialties);
+        modelAndView.addObject("departmentList", departments);
         return modelAndView;
     }
 

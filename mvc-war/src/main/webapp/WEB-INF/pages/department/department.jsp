@@ -39,14 +39,17 @@
             <th>
                 <td>Specialty ID</td>
                 <td>Title</td>
-                <td>Department ID</td>
+                <td>Department</td>
             <th>
             <c:forEach items="${specialtyList}" var="specialty">
                 <tr>
                     <td onclick="redirect_find_spec(${specialty.id})"><c:out value="${specialty.id}" /></td>
                     <td><c:out value="${specialty.title}" /></td>
-                    <td><button onclick="redirect_find(${specialty.departmentId})">
-                            ${specialty.departmentId}</button></td>
+                    <td>
+                        <button onclick="redirect_find(${specialty.departmentId})">
+                            ${department.title}
+                        </button>
+                    </td>
                 </tr>
             </c:forEach>
         </c:if>
