@@ -44,14 +44,18 @@ public class SpecialtyController {
     public ModelAndView findById(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("specialty/specialty");
         Specialty specialty = specialtyService.findById(id);
+        List<Specialty> specialties = specialtyService.findAll();
         List<Item> itemList = specialtyService.findAttachedItems(id);
+        List<Department> departments = departmentService.findAll();
         LOGGER.info(specialty.getId() + " " + specialty.toString());
         if (specialty.getId() == 0) {
             LOGGER.error("findById method of SpecialtyController class");
             throw new SpecialtyNotFoundException("Specialty not found");
         }
         modelAndView.addObject("specialty", specialty);
+        modelAndView.addObject("specialtyList", specialties);
         modelAndView.addObject("itemList", itemList);
+        modelAndView.addObject("departmentList", departments);
         return modelAndView;
     }
 

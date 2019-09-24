@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main page of the item</title>
-    <script src="<spring:url value="/resources/js/item/redirect.js" />"></script>
+    <script src="<spring:url value="/resources/js/item/item.js" />"></script>
     <link rel="stylesheet" type="text/css" href="<spring:url value="/resources/css/item/index.css" />" />
 </head>
 <body>
@@ -22,7 +22,15 @@
                     <td><c:out value="${item.id}" /></td>
                     <td><c:out value="${item.item}" /></td>
                     <td><c:out value="${item.price}" /></td>
-                    <td><button onclick="redirect_find_spec(${item.specialtyId})">${item.specialtyId}</button></td>
+                    <td>
+                        <button onclick="redirect_find_spec(${item.specialtyId})">
+                            <c:forEach items="${specialties}" var="spe">
+                                <c:if test="${item.specialtyId == spe.id}">
+                                    ${spe.title}
+                                </c:if>
+                            </c:forEach>
+                        </button>
+                    </td>
                     <td><button onclick="redirect_edit(${item.id})">Edit</button></td>
                     <td><button onclick="redirect_delete(${item.id})">Delete</button></td>
                 </tr>
@@ -33,7 +41,15 @@
                         <td><c:out value="${it.id}" /></td>
                         <td><c:out value="${it.item}" /></td>
                         <td><c:out value="${it.price}" /></td>
-                        <td><button onclick="redirect_find_spec(${it.specialtyId})">${it.specialtyId}</button></td>
+                        <td>
+                            <button onclick="redirect_find_spec(${it.specialtyId})">
+                                <c:forEach items="${specialties}" var="spe">
+                                    <c:if test="${it.specialtyId == spe.id}">
+                                        ${spe.title}
+                                    </c:if>
+                                </c:forEach>
+                            </button>
+                        </td>
                         <td><button onclick="redirect_edit(${it.id})">Edit</button></td>
                         <td><button onclick="redirect_delete(${it.id})">Delete</button></td>
                     </tr>

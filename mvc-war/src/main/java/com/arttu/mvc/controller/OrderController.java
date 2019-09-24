@@ -69,7 +69,7 @@ public class OrderController {
     @GetMapping(value = "/order/edit")
     public ModelAndView edit() {
         ModelAndView modelAndView = new ModelAndView("order/editOrder");
-        List<Item> itemList = itemService.findAll();
+        List<Item> itemList = itemService.findAll(); //TODO potent npe
         List<Client> clientList = clientService.findAll();
         if (itemList.isEmpty()) throw new ItemNotFoundException("Item not found");
         if (clientList.isEmpty()) throw new ClientNotFoundException("Client not found");

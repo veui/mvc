@@ -34,7 +34,9 @@ public class ItemController {
     public ModelAndView item() {
         ModelAndView modelAndView = new ModelAndView("item/item");
         List<Item> itemList = itemService.findAll();
+        List<Specialty> specialties = specialtyService.findAll();
         modelAndView.addObject("itemList", itemList);
+        modelAndView.addObject("specialties", specialties);
         modelAndView.setStatus(HttpStatus.OK);
         return modelAndView;
     }
@@ -43,11 +45,13 @@ public class ItemController {
     public ModelAndView findById(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("item/item");
         Item item = itemService.findById(id);
+        List<Specialty> specialties = specialtyService.findAll();
         if (item.getId() == 0) {
             LOGGER.error("findByID(int id) method of ItemController class has been triggered");
             throw new ItemNotFoundException("Item not found");
         }
         modelAndView.addObject("item", item);
+        modelAndView.addObject("specilaties", specialties);
         return modelAndView;
     }
 

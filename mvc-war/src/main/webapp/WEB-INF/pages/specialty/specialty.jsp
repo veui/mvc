@@ -21,9 +21,22 @@
                 <tr>
                     <td><c:out value="${specialty.id}" /></td>
                     <td><c:out value="${specialty.title}" /></td>
-                    <td><button onclick="redirect_find_department(${specialty.departmentId})">
-                            ${specialty.departmentId}</button></td>
-                    <td><c:out value="${specialty.parentId}" /></td>
+                    <td>
+                        <button onclick="redirect_find_department(${specialty.departmentId})">
+                            <c:forEach items="${departmentList}" var="dep">
+                                <c:if test="${specialty.departmentId == dep.id}">
+                                    ${dep.title}
+                                </c:if>
+                            </c:forEach>
+                        </button>
+                    </td>
+                    <td>
+                        <c:forEach items="${specialtyList}" var="spe">
+                            <c:if test="${spe.id == specialty.parentId}">
+                                ${spe.title}
+                            </c:if>
+                        </c:forEach>
+                    </td>
                     <td><button onclick="redirect_edit(${specialty.id})">Edit</button></td>
                     <td><button onclick="redirect_delete(${specialty.id})">Delete</button></td>
                 </tr>
@@ -63,14 +76,20 @@
                 <th>Item ID</th>
                 <th>Item</th>
                 <th>Price</th>
-                <th>Specialty ID</th>
+                <th>Specialty</th>
             </tr>
             <c:forEach items="${itemList}" var="item">
                 <tr>
                     <td><c:out value="${item.id}" /></td>
                     <td><c:out value="${item.item}" /></td>
                     <td><c:out value="${item.price}" /></td>
-                    <td><c:out value="${item.specialtyId}" /></td>
+                    <td>
+                        <c:forEach items="${specialtyList}" var="sl">
+                            <c:if test="${item.specialtyId == sl.id}">
+                                ${sl.title}
+                            </c:if>
+                        </c:forEach>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

@@ -7,7 +7,7 @@
 <head>
     <title>Edit Item</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="<spring:url value="/resources/js/item/edit.js" />" rel="script" type="text/javascript"></script>
+    <script src="<spring:url value="/resources/js/item/item.js" />" rel="script" type="text/javascript"></script>
     <link href="<spring:url value="/resources/css/item/edit.css" />" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -28,6 +28,7 @@
                     <input name="item" id="item" type="text" value="${itemList.item}" />
                 </label>
                 <div id="item-non-unique-message"></div>
+                <div id="item-not-valid"></div>
             </td>
         </tr>
         <tr>
@@ -36,6 +37,7 @@
                 <label>
                     <input name="price" id="price" type="text" value="${itemList.price}" />
                 </label>
+                <div id="price-not-valid"></div>
             </td>
         </tr>
         <tr>
