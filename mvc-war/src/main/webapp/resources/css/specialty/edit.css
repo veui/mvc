@@ -12,6 +12,9 @@ body {
     display: block;
 }
 
+table {
+    margin-left: 28%;
+}
 
 table td {
     color: white;

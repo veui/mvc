@@ -58,6 +58,6 @@
         </c:choose>
     </table>
 <br />
-    <button onclick="redirect_add()">Add</button>
+    <button class="addButton" onclick="redirect_add()">Add</button>
 </body>
 </html>

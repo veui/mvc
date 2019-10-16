@@ -51,6 +51,6 @@
         </c:choose>
     </table>
 <br />
-    <button type="button" onclick="redirect_add()">Add client</button>
+    <button class="addButton" type="button" onclick="redirect_add()">Add client</button>
 </body>
 </html>

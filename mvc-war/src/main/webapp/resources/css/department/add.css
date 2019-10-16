@@ -13,6 +13,11 @@ body {
 }
 
 
+table {
+    margin-left: 28%;
+}
+
+
 table td {
     color: white;
     padding: 20px 90px;

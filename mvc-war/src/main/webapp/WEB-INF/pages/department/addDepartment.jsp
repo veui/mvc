@@ -15,7 +15,6 @@
 <body>
 <h1>Department Input Form</h1>
 <hr />
-
 <table>
     <tr>
         <td>Title</td>
@@ -29,7 +28,7 @@
     </tr>
     <tr>
         <td></td>
-        <td><button type="button" onclick="add()">Submit</button></td>
+        <td><button class="myButton" type="button" onclick="add()">Submit</button></td>
     </tr>
 </table>
 </body>

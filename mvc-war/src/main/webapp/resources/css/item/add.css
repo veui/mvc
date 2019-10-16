@@ -6,12 +6,9 @@ body {
     background: #f0b841;
 }
 
-.mainMenu {
-    margin-left: 30%;
-    padding-top: 0;
-    display: block;
+table {
+    margin-left: 28%;
 }
-
 
 table td {
     color: white;

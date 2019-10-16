@@ -53,7 +53,8 @@
             </td>
         </tr>
         <tr>
-            <td><button type="button" onclick="edit()">Submit</button></td>
+            <td></td>
+            <td><button class="myButton" type="button" onclick="edit()">Submit</button></td>
         </tr>
     </table>
 </form>

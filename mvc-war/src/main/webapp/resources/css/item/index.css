@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     padding: 0;@localhost
-margin: 0;
+    margin: 0;
     color: #222222;
     background: #f0b841;
     height: 100vh;
@@ -11,41 +11,28 @@ header {
     margin-left: 30px;
     padding-top: 1%;
 }
-
-.mainMenu {
-    margin-left: 24%;
-    padding-top: 1%;
-    display: block;
-}
-
-.mainMenu a {
-    color: #fff;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 18px;
-}
-
 table {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif, serif;
     font-size: 14px;
     width: 820px;
     text-align: left;
     border-collapse: collapse;
-    background: #252F48;
-    margin: 5px;
+    margin-left: 25%;
     color: white;
+    align-self: center;
+    border: 1px solid black;
 }
 table th {
     color: #EDB749;
-    border-bottom: 1px solid #37B5A5;
     padding: 12px 17px;
+    background: #171abc;
+    border: 1px solid black;
 }
 table td {
     color: #f2fbff;
-    border-bottom: 1px solid #37B5A5;
-    border-right:1px solid #37B5A5;
     padding: 7px 17px;
-
+    background: #25bc33;
+    border: 1px solid black;
 }
 
 h1 {
@@ -79,7 +66,7 @@ h1 {
     padding:13px 32px;
     text-decoration:none;
     text-shadow:0 1px 0 #12941d;
-    margin-left: 30%;
+    margin-left: 45%;
 }
 .addButton:hover {
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b3ad09), color-stop(1, #1be053));

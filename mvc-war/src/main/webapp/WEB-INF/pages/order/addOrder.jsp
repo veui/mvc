@@ -80,7 +80,7 @@
         </td>
     </tr>
     <tr>
-        <td><button type="button" onclick="add()">Submit</button></td>
+        <td><button class="myButton" type="button" onclick="add()">Submit</button></td>
     </tr>
 </table>
 </body>

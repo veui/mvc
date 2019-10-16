@@ -95,6 +95,6 @@
         </table>
     </c:if>
 <br />
-    <button onclick="redirect_add()">Add specialty</button>
+    <button class="addButton" onclick="redirect_add()">Add specialty</button>
 </body>
 </html>

@@ -46,6 +46,6 @@
     </table>
 </c:if>
 <br />
-<button onclick="redirect_add()">Add order</button>
+<button class="addButton" onclick="redirect_add()">Add order</button>
 </body>
 </html>
