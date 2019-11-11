@@ -44,6 +44,8 @@ function redirect_find_client(id) {
 }
 
 function add() {
+    var base = formIdAllForOrderItemAdd($("#selectItem").val());
+    var base1 = formIdAllForOrderClientAdd($("#selectClient").val());
     clearData();
     let isValid = true;
     let error = [];
@@ -51,8 +53,8 @@ function add() {
         date : $('#date').val(),
         amount : $('#amount').val(),
         cost : $('#cost').val(),
-        clientId : $("#selectClient").val(),
-        itemId : $("#selectItem :selected").val()
+        clientId : base1,
+        itemId : base
     };
     if (validateDate(add.date) === false) {
         isValid = false;
@@ -97,6 +99,8 @@ function add() {
 }
 
 function edit() {
+    var base = formIdAllForOrderItemEdit($("#selectItem").val());
+    var base1 = formIdAllForOrderClientEdit($("#selectClient").val());
     clearData();
     let isValid = true;
     let error = [];
@@ -105,8 +109,8 @@ function edit() {
         date : $('#date').val(),
         amount : $('#amount').val(),
         cost : $('#cost').val(),
-        clientId : $("#selectClient :selected").val(),
-        itemId : $("#selectItem :selected").val()
+        clientId : base1,
+        itemId : base
     };
     if (validateDate(edit.date) === false) {
         isValid = false;

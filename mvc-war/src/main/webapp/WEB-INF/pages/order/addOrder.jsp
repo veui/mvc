@@ -49,34 +49,16 @@
         <td>Client</td>
         <td>
             <label for="selectClient">
-                <datalist id="datalist">
-                    <c:forEach items="${clientList}" var="cli">
-                        <option id="optionDp" value="${cli.id}">${cli.username}</option>
-                    </c:forEach>
-                </datalist>
-                <input name="Typelist" list="datalist" id="selectClient">
+                <input id="selectClient"/>
             </label>
-            <div id="client-not-valid"></div>
         </td>
     </tr>
     <tr>
         <td>Item</td>
         <td>
-            <c:choose>
-                <c:when test="${item != null}">
-                    <select disabled id="selectItem">
-                        <option value="${item.id}">${item.item}</option>
-                    </select>
-                </c:when>
-
-                <c:otherwise>
-                    <select id="selectItem">
-                        <c:forEach items="${itemList}" var="it">
-                            <option id="optionDp" value="${it.id}">${it.item}</option>
-                        </c:forEach>
-                    </select>
-                </c:otherwise>
-            </c:choose>
+            <label for="selectItem">
+                <input id="selectItem"/>
+            </label>
         </td>
     </tr>
     <tr>
@@ -85,3 +67,45 @@
 </table>
 </body>
 </html>
+
+
+<script>
+    $( function() {
+        var availableTags = [];
+        var availableTags1 = [];
+        <c:forEach items="${itemList}" var="it">
+        var str = '${it.item}';
+        availableTags.push(str);
+        </c:forEach>
+
+        <c:forEach items="${clientList}" var="cli">
+        var str = '${cli.username}';
+        availableTags1.push(str);
+        </c:forEach>
+
+        $( "#selectItem" ).autocomplete({
+            source: availableTags
+        });
+
+        $( "#selectClient" ).autocomplete({
+            source: availableTags1
+        });
+    });
+
+
+    function formIdAllForOrderItemAdd(str) {
+        <c:forEach items="${itemList}" var="it">
+        var strVar = '${it.item}';
+        if(strVar == str)
+            return '${it.id}';
+        </c:forEach>
+    }
+
+    function formIdAllForOrderClientAdd(str) {
+        <c:forEach items="${clientList}" var="cli">
+        var strVar = '${cli.username}';
+        if(strVar == str)
+            return '${cli.id}';
+        </c:forEach>
+    }
+</script>

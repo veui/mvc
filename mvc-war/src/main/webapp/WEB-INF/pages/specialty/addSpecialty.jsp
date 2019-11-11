@@ -31,11 +31,7 @@
         <td>Department</td>
         <td>
             <label for="selectId">
-                <select id="selectId">
-                    <c:forEach items="${departmentList}" var="department">
-                        <option id="optionDp" value="${department.id}">${department.title}</option>
-                    </c:forEach>
-                </select>
+                <input id="selectId" type="text" placeholder="Department" >
             </label>
         </td>
     </tr>
@@ -58,3 +54,25 @@
 </table>
 </body>
 </html>
+<script>
+    $( function() {
+        var availableTags = [];
+        <c:forEach items="${departmentList}" var="department">
+        var str = '${department.title}';
+        availableTags.push(str);
+        </c:forEach>
+
+        $("#selectId").autocomplete({
+            source: availableTags
+        });
+    });
+
+
+    function formIdForSpecDepartmentAdd(str) {
+        <c:forEach items="${departmentList}" var="department">
+        var strstrVar = '${department.title}';
+        if(strVar == str)
+            return '${department.id} ';
+        </c:forEach>
+    }
+</script>

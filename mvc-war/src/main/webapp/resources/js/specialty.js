@@ -44,13 +44,14 @@ function redirect_find_department(id) {
 }
 
 function add() {
+    var base = formIdForSpecDepartmentAdd($("#selectId").val());
     let isValid = true;
     let errorMsg = {
         message: ''
     };
     const add = {
         title: $('#title').val(),
-        departmentId: $("#selectId :selected").val(),
+        departmentId: base,
         parentId: $('#selectParent :selected').val()
     };
     if (validateString(add.title) === false) {
@@ -84,6 +85,7 @@ function add() {
 }
 
 function edit() {
+    var base = formIdForSpecDepartmentEdit($("#selectId").val());
     let isValid = true;
     let errorMsg = {
         message: ''
@@ -91,7 +93,7 @@ function edit() {
     const edit = {
         id : $('#id').val(),
         title : $('#title').val(),
-        departmentId : $('#optionDp').val(),
+        departmentId : base,
         parentId: $('#selectParent :selected').val()
     };
     if (edit.id === edit.parentId) {

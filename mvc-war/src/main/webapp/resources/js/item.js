@@ -36,6 +36,7 @@ function redirect_find_spec(id) {
 }
 
 function edit() {
+    var base = formIdForItemEdit($("#selectId").val());
     clearData();
     let isValid = true;
     let error = [];
@@ -43,7 +44,7 @@ function edit() {
         id: $(id).val(),
         item: $('#item').val(),
         price: $('#price').val(),
-        specialtyId: $('#optionDp').val()
+        specialtyId: base
     };
     if (validateString(edit.item) === false) {
         isValid = false;
@@ -87,13 +88,15 @@ function edit() {
 }
 
 function add() {
+    var base = formIdForItemAdd($("#selectId").val());
+
     clearData();
     let isValid = true;
     let error = [];
     const add = {
         item : $('#item').val(),
         price : $('#price').val(),
-        specialtyId : $("#selectId :selected").val()
+        specialtyId : base
     };
     if (validateString(add.item) === false) {
         isValid = false;
